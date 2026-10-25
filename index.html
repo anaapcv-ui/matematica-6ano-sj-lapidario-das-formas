@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lapidário das Formas · Kit de Matemática 6º ano · São José</title>
+<style>
+:root{--palco:#13111c;--palco2:#1d1a2e;--aco:#2e2947;--aco2:#453d66;--ambar:#fbbf24;--magenta:#60a5fa;--ciano:#a78bfa;--verde:#34d399;--vermelho:#fb7185;--texto:#ece9f7;--cinza:#9b96b5}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,Arial,sans-serif;background:radial-gradient(1000px 480px at 50% -10%,#2a1f4f,#13111c 62%),var(--palco);color:var(--texto);line-height:1.6;padding-bottom:60px}
+header{background:linear-gradient(120deg,#1b1336,#2b1d52 55%,#13233d);padding:26px 18px;text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.5);border-bottom:4px solid var(--ciano)}
+header .selo{font-size:.76rem;letter-spacing:2px;color:#d9ccff;text-transform:uppercase}
+header h1{font-size:1.55rem;margin:6px 0 2px}
+header p{color:#d8d2ee;font-size:.9rem}
+.wrap{max-width:840px;margin:0 auto;padding:16px}
+.barra-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0}
+.barra-nav a{background:var(--palco2);color:var(--texto);text-decoration:none;padding:7px 12px;border-radius:20px;font-size:.85rem;border:1px solid var(--aco)}
+.barra-nav a.on{background:var(--ciano);color:#1a1033;font-weight:bold}
+.barra-nav a.lock{opacity:.5}
+.intro{background:var(--palco2);border:1px solid var(--aco);border-radius:14px;padding:16px;margin-bottom:16px}
+.intro h2{color:var(--ciano);font-size:1.1rem;margin-bottom:8px}
+.intro ol{margin:8px 0 0 20px}
+.painel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;background:var(--palco2);border:1px solid var(--aco);border-radius:12px;padding:10px 14px;margin-bottom:16px;font-size:.85rem}
+.painel .btns{display:flex;gap:6px;flex-wrap:wrap}
+button{cursor:pointer;font-family:inherit}
+.mini{background:var(--palco);color:var(--texto);border:1px solid var(--aco2);border-radius:8px;padding:6px 10px;font-size:.8rem}
+.mini:hover{background:#262040}
+.fig{margin:10px 0;text-align:center;background:#16132a;border:1px solid var(--aco);border-radius:12px;padding:10px}
+.fig .cap{font-size:.8rem;color:var(--cinza);margin-top:4px}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th,td{border:1px solid var(--aco);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:#231e3d}
+.mini-t{margin:6px 0 12px}
+.trilha-fim{background:linear-gradient(120deg,#0f2a22,#123a2d);border:2px solid var(--verde);border-radius:16px;padding:18px;margin-top:18px;text-align:center}
+.trilha-fim h3{color:#8ff0c8;margin-bottom:8px}
+.trilha-fim a.btn{display:inline-block;margin-top:8px;background:var(--verde);color:#052a1c;text-decoration:none;font-weight:bold;padding:11px 20px;border-radius:10px}
+.trilha-fim a.btn.off{background:#262040;color:#76709a;pointer-events:none}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(5,3,12,.86);z-index:50;align-items:center;justify-content:center;padding:16px}
+.modal-bg.show{display:flex}
+.modal{background:var(--palco2);border:1px solid var(--ciano);border-radius:14px;padding:20px;max-width:430px;text-align:center}
+.modal .big{font-size:2.4rem}
+.modal p{margin-bottom:14px}
+.modal button,.modal a{display:inline-block;background:var(--ciano);color:#1a1033;border:none;border-radius:8px;padding:9px 16px;font-weight:bold;text-decoration:none;margin:3px}
+.modal button.sec{background:#2e2947;color:var(--texto)}
+.rodape{text-align:center;color:var(--cinza);font-size:.8rem;margin-top:24px}
+
+header{padding:30px 18px}
+header h1{font-size:1.9rem}
+.ordem{text-align:center;font-weight:bold;margin:10px 0;font-size:.95rem;color:#fff}
+.selo-pais{display:none;background:#0f2a22;border:1px solid var(--verde);color:#8ff0c8;border-radius:10px;padding:10px 14px;margin:12px 0;text-align:center;font-weight:bold}
+.selo-pais.show{display:block}
+.selo-pais button{margin-left:10px;background:transparent;border:1px solid var(--verde);color:#8ff0c8;border-radius:8px;padding:4px 10px}
+.trilha{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:16px 0}
+.card{position:relative;background:var(--palco2);border:1px solid var(--aco);border-radius:16px;padding:16px;text-decoration:none;color:var(--texto);display:block;transition:transform .15s,box-shadow .15s}
+.card .passo{font-size:.7rem;letter-spacing:1px;text-transform:uppercase;color:var(--cinza)}
+.card .emoji{font-size:2rem;margin:4px 0}
+.card h3{font-size:1.05rem;margin-bottom:6px}
+.card p{font-size:.85rem;color:#cfc9e6}
+.card .estado{margin-top:10px;font-size:.8rem;font-weight:bold;padding:6px 8px;border-radius:8px}
+.card.aberto{border-color:var(--ciano)}
+.card.aberto:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(167,139,250,.3)}
+.card.aberto .estado{background:#251c4a;color:var(--ciano)}
+.card.novo{animation:brilho 1.6s ease-in-out 3;border-color:var(--ambar)}
+@keyframes brilho{0%,100%{box-shadow:0 0 0 rgba(251,191,36,0)}50%{box-shadow:0 0 22px rgba(251,191,36,.6)}}
+.card.novo .estado{background:#352a08;color:var(--ambar)}
+.card.feito{border-color:var(--verde)}
+.card.feito .estado{background:#0f2a22;color:#8ff0c8}
+.card.trancado{opacity:.55;filter:grayscale(.6);pointer-events:none;cursor:not-allowed}
+.card.trancado .estado{background:#262040;color:var(--cinza)}
+.card .cadeado{position:absolute;top:10px;right:12px;font-size:1.3rem}
+.como,.cai{background:var(--palco2);border:1px solid var(--aco);border-radius:14px;padding:16px;margin:16px 0}
+.como h2{color:var(--ciano);font-size:1.1rem;margin-bottom:8px}
+.como ol{margin-left:20px}.como li{margin-bottom:6px}
+.cai{background:#2a2108;border:none;border-left:4px solid var(--ambar);border-radius:0 12px 12px 0;font-size:.93rem}
+.cai h2{color:var(--ambar);font-size:1.05rem;margin-bottom:6px}
+.cai p{margin-bottom:6px}
+.anexo{background:var(--palco2);border:1px solid var(--aco);border-radius:14px;padding:14px 16px;margin:16px 0;font-size:.92rem}
+.anexo a{color:var(--ciano);font-weight:bold}
+.dica{background:#17142b;border:1px solid var(--aco2);border-radius:12px;padding:12px 14px;font-size:.88rem;margin:16px 0}
+.rel{background:var(--palco2);border:1px dashed var(--ciano);border-radius:14px;padding:16px;margin:16px 0}
+.rel h2{color:var(--ciano);font-size:1.1rem;margin-bottom:8px}
+.rel input{padding:9px;border-radius:8px;border:1px solid var(--aco2);background:#0f0d1c;color:var(--texto);font-size:1rem;width:170px;text-transform:uppercase}
+.rel button{background:var(--ciano);color:#1a1033;border:none;border-radius:8px;padding:9px 14px;font-weight:bold;margin:4px 0 0 6px}
+.rel .out{margin-top:12px;font-size:.9rem}
+.rel .bloco{background:#17142b;border:1px solid var(--aco);border-radius:10px;padding:10px 12px;margin-bottom:10px}
+.rel .bloco ul{margin-left:18px}
+.rel button.liberar{background:var(--verde);color:#052a1c}
+.rel button.perigo{background:var(--vermelho);color:#2a0710}
+</style>
+</head>
+<body>
+<header><div class="selo">Kit de Estudos · Colégio São José · Matemática · 6º ano</div><h1>💎 Lapidário das Formas</h1><p>Polígonos · Triângulos · Quadriláteros · Porcentagem · Poliedros · Plano cartesiano · Prova 27/10</p></header>
+<div class="wrap">
+  <div class="intro">
+    <h2>👋 Bem-vindo(a) à bancada do lapidário!</h2>
+    <p>Aqui você é o <b>lapidário</b>, quem corta e dá forma às pedras preciosas. As <b>faces</b> de uma pedra são <b>polígonos</b>, a joia pronta é um <b>poliedro</b>, o valor dela se calcula com <b>porcentagem</b> e cada pedra tem um endereço na bandeja, que é um <b>plano cartesiano</b>. Cada bloco do estudo é uma <b>gema</b> para lapidar. Tudo foi feito a partir do seu livro (Ecos Matemática 6), nas páginas que vão cair na prova.</p>
+    <div class="ordem">Trilha: 📖 Leitura Estendida → 🎯 Quiz → 🗺️ Resumo → 📝 Simulado</div>
+    <p style="text-align:center;font-size:.9rem;color:var(--cinza)">Os materiais abrem <b>um por vez, na ordem</b>. Conclua um para destravar o próximo.</p>
+  </div>
+  <div class="selo-pais" id="selo-pais">🔓 Trilha liberada pelos pais <button onclick="trancar()">Trancar de novo</button></div>
+  <div class="trilha" id="trilha"></div>
+  <div class="como">
+    <h2>📌 Como usar este material</h2>
+    <ol>
+      <li><b>Leitura Estendida</b> (16 gemas): leia e <b>escreva</b> as respostas com as suas palavras, fazendo as contas. Conferir todas as gemas e responder a autoavaliação destrava o Quiz.</li>
+      <li><b>Quiz</b> (15 questões): teste o que entendeu enquanto está fresco. Enviar o Quiz destrava o Resumo.</li>
+      <li><b>Resumo</b>: feche as dúvidas que o Quiz mostrou. Ler até o fim e clicar em "Li o resumo até o fim" destrava o Simulado.</li>
+      <li><b>Simulado</b> (26 questões no estilo da prova): valendo, como se fosse a prova de verdade.</li>
+      <li>Depois do Simulado, <b>tudo fica aberto</b> para revisar quantas vezes quiser até a prova.</li>
+    </ol>
+    <p style="margin-top:8px;font-size:.88rem;color:var(--cinza)">O progresso fica salvo automaticamente neste navegador. Dá para exportar/importar em cada material.</p>
+  </div>
+  <div class="cai">
+    <h2>💎 O que cai na prova (27/10)</h2>
+    <p><b>Polígonos</b> (identificar, convexos e não convexos, nome) — livro pp. 262-268.</p>
+    <p><b>Triângulos</b> (classificação quanto aos lados e quanto aos ângulos) — p. 269.</p>
+    <p><b>Quadriláteros</b> (paralelogramos e trapézios) — pp. 270-271; exercícios pp. 276-280.</p>
+    <p><b>Porcentagem</b> (a porcentagem e as frações — problemas; porcentagem de uma quantidade; a porcentagem e os decimais) — pp. 312-332.</p>
+    <p><b>Poliedros</b> (prismas e pirâmides) — pp. 340-343.</p>
+    <p><b>Plano cartesiano</b> (localização de pontos no plano) — pp. 360, 361 e 371.</p>
+    <p style="color:var(--cinza);font-size:.85rem">No livro digital, essas páginas ficam nos módulos 6 (Desenho e construção), 7 (Análise de dados e situações) e 8 (Exploração das dimensões).</p>
+  </div>
+  <div class="anexo">📄 <b>Anexo para imprimir:</b> <a href="folha-de-regras.pdf" target="_blank">Folha de Regras (mapa mental em 1 página)</a> — sempre aberta, ótima para colar no caderno.</div>
+  <div class="dica">📌 <b>Dica para os pais:</b> o progresso é do navegador de cada aparelho. Se a Leitura foi feita no tablet e o Quiz vai ser no computador, use 📥 Exportar / 📤 Importar em cada material — ou libere a trilha com o código da família no relatório abaixo.</div>
+  <div class="rel">
+    <h2>📊 Relatório para os pais</h2>
+    <p>Digite um dos códigos: <b>MED-…</b> (do Quiz), <b>SIM-…</b> (do Simulado) ou o código fixo da família <b>PAIS-77</b> (mostra tudo e permite liberar a trilha).</p>
+    <div style="margin-top:8px"><input id="cod-in" placeholder="PAIS-77"><button onclick="verRelatorio()">🔓 Ver relatório</button></div>
+    <div class="out" id="rel-out"></div>
+  </div>
+  <div class="rodape">Feito com carinho para o jovem aprendiz. 💎 Boa lapidação — e boa prova!</div>
+</div>
+<div class="modal-bg" id="modal"><div class="modal"><p id="modal-txt"></p><button id="modal-ok">Ok</button><button class="sec" id="modal-cancel" onclick="fecharModal()" style="display:none">Cancelar</button></div></div>
+<script>
+
+var KIT='lapidario_mat6sj';
+var TRILHA=[
+ {id:'leitura', chave:KIT+'_leitura_v1', nome:'Leitura Estendida', arquivo:'leitura-estendida.html', emoji:'📖'},
+ {id:'quiz', chave:KIT+'_quiz_v1', nome:'Quiz', arquivo:'quiz.html', emoji:'🎯'},
+ {id:'resumo', chave:KIT+'_resumo_v1', nome:'Resumo', arquivo:'resumo.html', emoji:'🗺️'},
+ {id:'simulado', chave:KIT+'_simulado_v1', nome:'Simulado', arquivo:'simulado.html', emoji:'📝'}
+];
+var NBLOCOS=16;
+function lerJSON(k){ try{ var s=localStorage.getItem(k); return s?JSON.parse(s):null; }catch(e){ return null; } }
+function trilhaLiberada(){ var t=lerJSON(KIT+'_trilha_v1'); return !!(t&&t.liberadoPelosPais); }
+function etapaConcluida(id){ var e=TRILHA.filter(function(t){return t.id===id;})[0]; var d=lerJSON(e.chave); return !!(d&&d.concluido); }
+function podeAbrir(id){ var idx=TRILHA.map(function(t){return t.id;}).indexOf(id); if(idx<=0||trilhaLiberada()) return true; return etapaConcluida(TRILHA[idx-1].id); }
+function marcarNav(){
+  var links=document.querySelectorAll('#nav a[data-etapa]');
+  for(var i=0;i<links.length;i++){ var id=links[i].getAttribute('data-etapa'); var t=links[i].textContent.replace('🔒 ','');
+    if(!podeAbrir(id)){ links[i].classList.add('lock'); links[i].textContent='🔒 '+t; links[i].setAttribute('title','Ainda trancado'); }
+    else { links[i].classList.remove('lock'); links[i].textContent=t; links[i].removeAttribute('title'); } }
+}
+function faltaTexto(id){ /* o que falta no material ANTERIOR para abrir este */
+  var idx=TRILHA.map(function(t){return t.id;}).indexOf(id); var ant=TRILHA[idx-1]; var d=lerJSON(ant.chave)||{};
+  if(ant.id==='leitura'){ var p=d.progresso||{conferidos:0,total:NBLOCOS,chkPendentes:0}; var f=p.total-p.conferidos; return f>0? 'conclua a Leitura Estendida (faltam '+f+' de '+p.total+' gemas)' : 'responda a autoavaliação Sim/Não da Leitura Estendida ('+p.chkPendentes+' ponto(s) pendente(s))'; }
+  if(ant.id==='quiz'){ var n=d.resp?Object.keys(d.resp).length:0; return 'envie o Quiz ('+n+' de 15 respondidas)'; }
+  if(ant.id==='resumo'){ return 'leia o Resumo até o fim e clique em "Li o resumo até o fim" (rolagem: '+Math.round(d.rolagemMax||0)+'%)'; }
+  return 'conclua '+ant.nome;
+}
+function checarTrava(id,nome){
+  if(podeAbrir(id)) return true;
+  document.getElementById('lock-txt').textContent='Para abrir '+nome+', '+faltaTexto(id)+'.';
+  document.getElementById('lock').classList.add('show');
+  var w=document.querySelector('.wrap'); w.style.filter='blur(7px)'; w.style.pointerEvents='none'; w.setAttribute('aria-hidden','true');
+  return false;
+}
+var TITULOS=["Linhas, regiões planas e sólidos", "Polígonos convexos e não convexos", "Elementos dos polígonos", "Nome dos polígonos e polígonos regulares", "Triângulos: elementos e classificação quanto aos lados", "Triângulos: classificação quanto aos ângulos", "Quadriláteros e trapézios", "Paralelogramos: retângulo, losango e quadrado", "O que é porcentagem", "Porcentagem de um valor", "Descobrindo o total a partir de uma parte", "Porcentagem e números decimais", "Aplicando porcentagens: descontos, aumentos e partes", "Poliedros e corpos redondos", "Prismas e pirâmides", "Plano cartesiano"];
+
+var DESC={leitura:'16 gemas com o conteúdo explicado e 3 perguntas em cada, para escrever com as suas palavras.',quiz:'15 questões rápidas (Teste de Brilho). Código MED e gabarito comentado.',resumo:'Catálogo de Gemas: cards, tabelas, cartas para virar, post-its e glossário.',simulado:'26 questões no estilo da prova: múltipla escolha e números romanos. Código SIM.'};
+function gravarJSON(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+function dados(id){ var e=TRILHA.filter(function(t){return t.id===id;})[0]; return lerJSON(e.chave); }
+function fmt(iso){ if(!iso) return ''; var d=new Date(iso); return d.toLocaleDateString('pt-BR')+' '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}); }
+function renderTrilha(){
+  var c=document.getElementById('trilha'); var h='';
+  TRILHA.forEach(function(t,idx){
+    var feito=etapaConcluida(t.id), aberto=podeAbrir(t.id);
+    var cls='card', est='', cad='';
+    if(feito){ cls+=' feito'; est='✅ Concluído · '+fmt(dados(t.id).concluidoEm); }
+    else if(aberto){ var novo=(idx>0 && etapaConcluida(TRILHA[idx-1].id)); cls+=novo?' novo':' aberto'; est=novo?'✨ Novo destravado — pode começar!':(idx===0?'▶️ Comece por aqui':'▶️ Aberto (trilha liberada)'); }
+    else { cls+=' trancado'; cad='<span class="cadeado">🔒</span>'; var f=faltaTexto(t.id); est='🔒 Destrava quando você '+f.replace(/^conclua /,'concluir ').replace(/^envie /,'enviar ').replace(/^leia /,'ler ').replace(/^responda /,'responder ').replace(' e clique em',' e clicar em')+'.'; }
+    h+='<a class="'+cls+'" href="'+(aberto?t.arquivo:'#')+'" '+(aberto?'':'tabindex="-1" aria-disabled="true" onclick="return false"')+'>'+cad+'<div class="passo">Passo '+(idx+1)+'</div><div class="emoji">'+t.emoji+'</div><h3>'+t.nome+'</h3><p>'+DESC[t.id]+'</p><div class="estado">'+est+'</div></a>';
+  });
+  c.innerHTML=h;
+  document.getElementById('selo-pais').classList.toggle('show', trilhaLiberada());
+}
+function relLeitura(){
+  var e=dados('leitura'); if(!e||!e.blocos) return 'Ainda não há registro da Leitura Estendida.';
+  var conf=0,red=0,nao=0,lista=[];
+  Object.keys(e.blocos).forEach(function(i){ var b=e.blocos[i]; if(!b.conferido) return; conf++; if(b.perguntas)Object.keys(b.perguntas).forEach(function(j){ var p=b.perguntas[j]; if(p.red){red++; lista.push('Gema '+(+i+1)+' ('+TITULOS[i]+'), pergunta '+(+j+1)+': resposta em vermelho (parecida com o texto)');} if(p.chk)Object.keys(p.chk).forEach(function(k){ if(p.chk[k]==='nao'){nao++; lista.push('Gema '+(+i+1)+' ('+TITULOS[i]+'), pergunta '+(+j+1)+': marcou "Não" no ponto '+(+k+1));} }); }); });
+  return '<b>Gemas conferidas:</b> '+conf+' de '+NBLOCOS+'.<br><b>Respostas em vermelho (muito parecidas com o texto):</b> '+red+'.<br><b>Pontos marcados como "Não" na autoavaliação:</b> '+nao+'.'+(lista.length?'<ul>'+lista.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>':'');
+}
+function relTeste(id,nome){ var e=dados(id); if(!e) return 'Ainda não há registro do '+nome+'.'; if(!e.enviado) return nome+' iniciado ('+Object.keys(e.resp||{}).length+' respondidas), ainda não enviado.'; return '<b>'+nome+' enviado.</b> Acertos: '+e.acertos+' de '+e.total+'. Código: '+e.codigo+'.'+(e.erros&&e.erros.length?'<br>Questões erradas: '+e.erros.join(', ')+'.':' Acertou todas! 👑'); }
+function relResumo(){ var e=dados('resumo'); if(!e) return 'Ainda não há registro do Resumo.'; return '<b>Rolagem máxima:</b> '+Math.round(e.rolagemMax||0)+'%. '+(e.concluido?'<b>Lido até o fim</b> em '+fmt(e.concluidoEm)+'.':'Ainda não confirmou a leitura até o fim.'); }
+function relTrilha(){
+  var h='<ul>';
+  TRILHA.forEach(function(t){ var d=dados(t.id); h+='<li>'+t.emoji+' '+t.nome+': '+((d&&d.concluido)?'<span style="color:#8ff0c8">concluído em '+fmt(d.concluidoEm)+'</span>':'<span style="color:#ffc2cd">não concluído</span>')+'</li>'; });
+  h+='</ul>'; var tr=lerJSON(KIT+'_trilha_v1'); if(tr&&tr.liberadoPelosPais) h+='<p>🔓 Trilha liberada pelos pais em '+fmt(tr.liberadoEm)+'.</p>'; else if(tr&&tr.liberadoEm) h+='<p>A trilha foi liberada pelos pais em '+fmt(tr.liberadoEm)+' e trancada de novo em '+fmt(tr.trancadoEm)+'.</p>';
+  return h;
+}
+function verRelatorio(){
+  var v=document.getElementById('cod-in').value.trim().toUpperCase(); var out=document.getElementById('rel-out');
+  var q=dados('quiz')||{}, s=dados('simulado')||{};
+  var tudo=(v==='PAIS-77'), okQ=(q.codigo&&v===q.codigo), okS=(s.codigo&&v===s.codigo);
+  if(!tudo&&!okQ&&!okS){ out.innerHTML='<span style="color:#ffc2cd">Código não reconhecido.</span>'; return; }
+  var h='';
+  if(tudo||okQ) h+='<div class="bloco"><b>📖 Leitura Estendida</b><br>'+relLeitura()+'</div><div class="bloco"><b>🎯 Quiz</b><br>'+relTeste('quiz','Quiz')+'</div>';
+  if(tudo) h+='<div class="bloco"><b>🗺️ Resumo</b><br>'+relResumo()+'</div>';
+  if(tudo||okS) h+='<div class="bloco"><b>📝 Simulado</b><br>'+relTeste('simulado','Simulado')+'</div>';
+  if(tudo){ h+='<div class="bloco"><b>🛤️ Trilha</b>'+relTrilha()+'</div>';
+    h+= trilhaLiberada() ? '<button class="liberar" onclick="trancar()">🔒 Trancar de novo</button>' : '<button class="liberar" onclick="liberar()">🔓 Liberar todos os materiais</button>';
+    h+=' <button class="perigo" onclick="pedirZerarKit()">🗑️ Zerar o kit inteiro</button> <button onclick="exportarTudo()">📥 Exportar tudo (JSON)</button>';
+  }
+  out.innerHTML=h;
+}
+function exportarTudo(){ var o={kit:KIT,exportadoEm:new Date().toISOString(),trilha:lerJSON(KIT+'_trilha_v1')}; TRILHA.forEach(function(t){ o[t.id]=lerJSON(t.chave); }); var blob=new Blob([JSON.stringify(o,null,2)],{type:'application/json'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='kit_lapidario_completo.json'; a.click(); }
+function liberar(){ var t=lerJSON(KIT+'_trilha_v1')||{}; t.liberadoPelosPais=true; t.liberadoEm=new Date().toISOString(); gravarJSON(KIT+'_trilha_v1',t); renderTrilha(); verRelatorio(); }
+function trancar(){ var t=lerJSON(KIT+'_trilha_v1')||{}; t.liberadoPelosPais=false; t.trancadoEm=new Date().toISOString(); gravarJSON(KIT+'_trilha_v1',t); renderTrilha(); if(document.getElementById('rel-out').innerHTML) verRelatorio(); }
+function pedirZerarKit(){ mostrarModal('Apagar TODO o progresso do kit (leitura, quiz, resumo, simulado e trilha)? A criança volta ao começo, com só a Leitura Estendida aberta.',true,function(){ TRILHA.forEach(function(t){ try{localStorage.removeItem(t.chave);}catch(e){} }); try{localStorage.removeItem(KIT+'_trilha_v1');}catch(e){} renderTrilha(); document.getElementById('rel-out').innerHTML='<span style="color:#8ff0c8">Kit zerado.</span>'; }); }
+function mostrarModal(txt,confirmar,fn){ document.getElementById('modal-txt').innerHTML=txt; document.getElementById('modal').classList.add('show'); document.getElementById('modal-cancel').style.display=confirmar?'inline-block':'none'; var ok=document.getElementById('modal-ok'); ok.textContent=confirmar?'Sim, apagar':'Ok'; ok.onclick=function(){ if(fn) fn(); fecharModal(); }; }
+function fecharModal(){ document.getElementById('modal').classList.remove('show'); }
+renderTrilha();
+
+</script>
+</body>
+</html>

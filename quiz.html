@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz · Lapidário das Formas · Matemática 6º</title>
+<style>
+:root{--palco:#13111c;--palco2:#1d1a2e;--aco:#2e2947;--aco2:#453d66;--ambar:#fbbf24;--magenta:#60a5fa;--ciano:#a78bfa;--verde:#34d399;--vermelho:#fb7185;--texto:#ece9f7;--cinza:#9b96b5}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,Arial,sans-serif;background:radial-gradient(1000px 480px at 50% -10%,#2a1f4f,#13111c 62%),var(--palco);color:var(--texto);line-height:1.6;padding-bottom:60px}
+header{background:linear-gradient(120deg,#1b1336,#2b1d52 55%,#13233d);padding:26px 18px;text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.5);border-bottom:4px solid var(--ciano)}
+header .selo{font-size:.76rem;letter-spacing:2px;color:#d9ccff;text-transform:uppercase}
+header h1{font-size:1.55rem;margin:6px 0 2px}
+header p{color:#d8d2ee;font-size:.9rem}
+.wrap{max-width:840px;margin:0 auto;padding:16px}
+.barra-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0}
+.barra-nav a{background:var(--palco2);color:var(--texto);text-decoration:none;padding:7px 12px;border-radius:20px;font-size:.85rem;border:1px solid var(--aco)}
+.barra-nav a.on{background:var(--ciano);color:#1a1033;font-weight:bold}
+.barra-nav a.lock{opacity:.5}
+.intro{background:var(--palco2);border:1px solid var(--aco);border-radius:14px;padding:16px;margin-bottom:16px}
+.intro h2{color:var(--ciano);font-size:1.1rem;margin-bottom:8px}
+.intro ol{margin:8px 0 0 20px}
+.painel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;background:var(--palco2);border:1px solid var(--aco);border-radius:12px;padding:10px 14px;margin-bottom:16px;font-size:.85rem}
+.painel .btns{display:flex;gap:6px;flex-wrap:wrap}
+button{cursor:pointer;font-family:inherit}
+.mini{background:var(--palco);color:var(--texto);border:1px solid var(--aco2);border-radius:8px;padding:6px 10px;font-size:.8rem}
+.mini:hover{background:#262040}
+.fig{margin:10px 0;text-align:center;background:#16132a;border:1px solid var(--aco);border-radius:12px;padding:10px}
+.fig .cap{font-size:.8rem;color:var(--cinza);margin-top:4px}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th,td{border:1px solid var(--aco);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:#231e3d}
+.mini-t{margin:6px 0 12px}
+.trilha-fim{background:linear-gradient(120deg,#0f2a22,#123a2d);border:2px solid var(--verde);border-radius:16px;padding:18px;margin-top:18px;text-align:center}
+.trilha-fim h3{color:#8ff0c8;margin-bottom:8px}
+.trilha-fim a.btn{display:inline-block;margin-top:8px;background:var(--verde);color:#052a1c;text-decoration:none;font-weight:bold;padding:11px 20px;border-radius:10px}
+.trilha-fim a.btn.off{background:#262040;color:#76709a;pointer-events:none}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(5,3,12,.86);z-index:50;align-items:center;justify-content:center;padding:16px}
+.modal-bg.show{display:flex}
+.modal{background:var(--palco2);border:1px solid var(--ciano);border-radius:14px;padding:20px;max-width:430px;text-align:center}
+.modal .big{font-size:2.4rem}
+.modal p{margin-bottom:14px}
+.modal button,.modal a{display:inline-block;background:var(--ciano);color:#1a1033;border:none;border-radius:8px;padding:9px 16px;font-weight:bold;text-decoration:none;margin:3px}
+.modal button.sec{background:#2e2947;color:var(--texto)}
+.rodape{text-align:center;color:var(--cinza);font-size:.8rem;margin-top:24px}
+
+.codigo{background:linear-gradient(120deg,#0f2a22,#155238);border:2px solid var(--verde);border-radius:14px;padding:16px;text-align:center;margin-bottom:16px;display:none}
+.codigo.show{display:block}
+.codigo .cod{font-size:1.8rem;font-weight:bold;letter-spacing:3px;color:#8ff0c8;margin:6px 0}
+.progresso{height:10px;background:var(--aco);border-radius:6px;overflow:hidden;margin-bottom:16px}
+.progresso div{height:100%;background:linear-gradient(90deg,var(--ciano),var(--ambar));width:0;transition:width .3s}
+.q{background:var(--palco2);border:1px solid var(--aco);border-radius:16px;padding:16px;margin-bottom:14px}
+.q .num{color:var(--ciano);font-weight:bold;font-size:.8rem;letter-spacing:1px;text-transform:uppercase}
+.q .tema,.q .tipo{float:right;font-size:.7rem;color:var(--cinza);background:var(--palco);border:1px solid var(--aco2);border-radius:10px;padding:2px 8px}
+.q .tipo.rom{background:#11402f;color:#a8f0d2;border-color:#1d5a44}
+.q h3{font-size:1rem;margin:6px 0 10px;font-weight:600;clear:both}
+.afirm{background:#17142b;border-left:3px solid var(--aco2);padding:8px 12px;margin:6px 0;border-radius:0 8px 8px 0;font-size:.93rem}
+.afirm.ok{border-left-color:var(--verde)}.afirm.no{border-left-color:#777;color:#aaa}
+.alt{display:block;background:#17142b;border:1px solid var(--aco2);border-radius:10px;padding:10px 12px;margin:6px 0;cursor:pointer}
+.alt:hover{border-color:var(--ciano)}
+.alt input{margin-right:8px}
+.alt.sel{border-color:var(--ciano);background:#251c4a}
+.alt.certa{border-color:var(--verde);background:#0f2a22;color:#d9fff0}
+.alt.errada{border-color:#555;background:#1a1826;color:#a9a6b8}
+.alt.marcada-errada{border-color:var(--vermelho);background:#3a1420}
+.exp{margin-top:8px;font-size:.88rem;padding:8px 10px;border-radius:8px;background:#13111f;border-left:3px solid var(--ambar);display:none}
+.alt.certa .exp{border-left-color:var(--verde)}
+.exp.show{display:block}
+.enviar{width:100%;background:var(--ambar);color:#2a1d00;border:none;border-radius:12px;padding:14px;font-size:1.05rem;font-weight:bold;margin:10px 0}
+.enviar:disabled{background:#262040;color:#76709a;cursor:not-allowed}
+.gab{background:var(--palco2);border:1px dashed var(--ciano);border-radius:14px;padding:16px;margin:16px 0;display:none}
+.gab.show{display:block}
+.gab input{padding:9px;border-radius:8px;border:1px solid var(--aco2);background:#0f0d1c;color:var(--texto);font-size:1rem;width:180px;text-transform:uppercase}
+.gab button{background:var(--ciano);color:#1a1033;border:none;border-radius:8px;padding:9px 14px;font-weight:bold;margin-left:6px}
+.gab .msg{margin-top:8px}
+.legenda{font-size:.82rem;color:var(--cinza);margin-top:6px}
+</style>
+</head>
+<body>
+<header><div class="selo">Lapidário das Formas · Matemática 6º ano · Colégio São José</div><h1>🎯 Quiz · Teste de Brilho</h1><p>15 questões · Mód. 6, 7 e 8 · Código MED para os pais</p></header>
+<div class="wrap">
+  <nav class="barra-nav" id="nav"><a href="leitura-estendida.html">📖 Leitura Estendida</a><a class="on" href="quiz.html" data-etapa="quiz">🎯 Quiz</a><a href="resumo.html" data-etapa="resumo">🗺️ Resumo</a><a href="simulado.html" data-etapa="simulado">📝 Simulado</a><a href="index.html">🏠 Início</a></nav>
+  <div class="codigo" id="codigo"><div>Seu código de liberação</div><div class="cod" id="cod"></div><div id="codtxt"></div></div>
+  
+  <div class="intro"><h2>🎯 Teste o brilho das suas gemas</h2><p>Responda as <b>15 questões</b> (todas obrigatórias). Depois de <b>Enviar</b>, as respostas travam, sai o seu <b>código MED</b> e o gabarito comentado abre com o código. Ao enviar, o <b>🗺️ Resumo destrava</b>.</p></div>
+  <div class="painel"><span id="salvo">💾 Progresso salvo automaticamente.</span><div class="btns"><button class="mini" onclick="exportar()">📥 Exportar</button><button class="mini" onclick="document.getElementById('imp').click()">📤 Importar</button><input type="file" id="imp" accept="application/json" style="display:none" onchange="importar(event)"><button class="mini" onclick="pedirZerar()">🗑️ Zerar tudo</button></div></div>
+  <div class="progresso"><div id="barra"></div></div>
+  <div id="questoes"></div>
+  <button class="enviar" id="btn-enviar" onclick="enviar()" disabled>📨 Enviar respostas</button>
+  <div class="gab" id="gab"><b>🔑 Gabarito comentado:</b> digite o código MED que apareceu no topo.<br><input id="gab-in" placeholder="MED-XX-YY"><button onclick="abrirGab()">Ver gabarito</button><div class="msg" id="gab-msg"></div><div class="legenda">No gabarito: a alternativa certa fica em <b style="color:#8ff0c8">verde</b> e cada errada fica em cinza, com a explicação do porquê.</div></div>
+  <div class="trilha-fim" id="trilha-fim"><h3>🔒 Próxima etapa: Resumo</h3><p id="trilha-fim-txt">O Resumo destrava quando você enviar o Quiz.</p><a class="btn off" id="btn-prox" href="resumo.html">🗺️ Ir para o Resumo</a></div>
+  <div class="rodape">Feito com carinho para o jovem aprendiz. 💎</div>
+</div>
+<div class="modal-bg" id="lock"><div class="modal"><div class="big">🔒</div><p><b>Esta etapa ainda está trancada.</b></p><p id="lock-txt"></p><a href="index.html">Voltar ao início</a></div></div>
+<div class="modal-bg" id="modal"><div class="modal"><p id="modal-txt"></p><button id="modal-ok">Ok</button><button class="sec" id="modal-cancel" onclick="fecharModal()" style="display:none">Cancelar</button></div></div>
+<script>
+
+var KIT='lapidario_mat6sj';
+var TRILHA=[
+ {id:'leitura', chave:KIT+'_leitura_v1', nome:'Leitura Estendida', arquivo:'leitura-estendida.html', emoji:'📖'},
+ {id:'quiz', chave:KIT+'_quiz_v1', nome:'Quiz', arquivo:'quiz.html', emoji:'🎯'},
+ {id:'resumo', chave:KIT+'_resumo_v1', nome:'Resumo', arquivo:'resumo.html', emoji:'🗺️'},
+ {id:'simulado', chave:KIT+'_simulado_v1', nome:'Simulado', arquivo:'simulado.html', emoji:'📝'}
+];
+var NBLOCOS=16;
+function lerJSON(k){ try{ var s=localStorage.getItem(k); return s?JSON.parse(s):null; }catch(e){ return null; } }
+function trilhaLiberada(){ var t=lerJSON(KIT+'_trilha_v1'); return !!(t&&t.liberadoPelosPais); }
+function etapaConcluida(id){ var e=TRILHA.filter(function(t){return t.id===id;})[0]; var d=lerJSON(e.chave); return !!(d&&d.concluido); }
+function podeAbrir(id){ var idx=TRILHA.map(function(t){return t.id;}).indexOf(id); if(idx<=0||trilhaLiberada()) return true; return etapaConcluida(TRILHA[idx-1].id); }
+function marcarNav(){
+  var links=document.querySelectorAll('#nav a[data-etapa]');
+  for(var i=0;i<links.length;i++){ var id=links[i].getAttribute('data-etapa'); var t=links[i].textContent.replace('🔒 ','');
+    if(!podeAbrir(id)){ links[i].classList.add('lock'); links[i].textContent='🔒 '+t; links[i].setAttribute('title','Ainda trancado'); }
+    else { links[i].classList.remove('lock'); links[i].textContent=t; links[i].removeAttribute('title'); } }
+}
+function faltaTexto(id){ /* o que falta no material ANTERIOR para abrir este */
+  var idx=TRILHA.map(function(t){return t.id;}).indexOf(id); var ant=TRILHA[idx-1]; var d=lerJSON(ant.chave)||{};
+  if(ant.id==='leitura'){ var p=d.progresso||{conferidos:0,total:NBLOCOS,chkPendentes:0}; var f=p.total-p.conferidos; return f>0? 'conclua a Leitura Estendida (faltam '+f+' de '+p.total+' gemas)' : 'responda a autoavaliação Sim/Não da Leitura Estendida ('+p.chkPendentes+' ponto(s) pendente(s))'; }
+  if(ant.id==='quiz'){ var n=d.resp?Object.keys(d.resp).length:0; return 'envie o Quiz ('+n+' de 15 respondidas)'; }
+  if(ant.id==='resumo'){ return 'leia o Resumo até o fim e clique em "Li o resumo até o fim" (rolagem: '+Math.round(d.rolagemMax||0)+'%)'; }
+  return 'conclua '+ant.nome;
+}
+function checarTrava(id,nome){
+  if(podeAbrir(id)) return true;
+  document.getElementById('lock-txt').textContent='Para abrir '+nome+', '+faltaTexto(id)+'.';
+  document.getElementById('lock').classList.add('show');
+  var w=document.querySelector('.wrap'); w.style.filter='blur(7px)'; w.style.pointerEvents='none'; w.setAttribute('aria-hidden','true');
+  return false;
+}
+var Q=[{"tema": "Gema 2 · Polígonos", "p": "Qual destas figuras é um <b>polígono</b>?", "alts": [{"t": "Um pentágono pintado por dentro, com contorno de segmentos de reta sem cruzamento.", "e": "É linha poligonal fechada e simples com a região interna: é polígono.", "ok": true, "id": "a"}, {"t": "Um círculo.", "e": "O círculo tem contorno curvo; polígono só tem segmentos de reta.", "id": "b"}, {"t": "O desenho do número 8 feito com segmentos que se cruzam.", "e": "Tem cruzamento: a linha é não simples, então não é polígono.", "id": "c"}, {"t": "Um zigue-zague aberto.", "e": "É uma linha poligonal aberta; não fecha uma região, então não é polígono.", "id": "d"}]}, {"tema": "Gema 2 · Convexo", "p": "Um polígono é <b>não convexo</b> quando…", "alts": [{"t": "existe pelo menos um segmento AB, com A e B no interior, que não fica totalmente dentro dele.", "e": "É a definição do livro: basta um segmento escapar.", "ok": true, "id": "a"}, {"t": "todos os segmentos AB com pontos do interior ficam dentro dele.", "e": "Isso é o polígono convexo.", "id": "b"}, {"t": "ele tem mais de cinco lados.", "e": "O número de lados não decide se é convexo ou não.", "id": "c"}, {"t": "os lados têm medidas diferentes.", "e": "Medidas diferentes não tornam um polígono não convexo.", "id": "d"}]}, {"tema": "Gema 3 · Elementos", "p": "No pentágono <b>ABCDE</b>, qual segmento é uma <b>diagonal</b>?", "alts": [{"t": "BD", "e": "B e D não são vértices consecutivos: BD é diagonal.", "ok": true, "id": "a"}, {"t": "AB", "e": "A e B são vizinhos: AB é lado.", "id": "b"}, {"t": "CD", "e": "C e D são vizinhos: CD é lado.", "id": "c"}, {"t": "EA", "e": "E e A são vizinhos (fecham o contorno): EA é lado.", "id": "d"}]}, {"tema": "Gema 4 · Nomes", "p": "Como se chama o polígono de <b>9 lados</b>?", "alts": [{"t": "Eneágono.", "e": "9 lados = eneágono.", "ok": true, "id": "a"}, {"t": "Heptágono.", "e": "Heptágono tem 7 lados.", "id": "b"}, {"t": "Octógono.", "e": "Octógono tem 8 lados.", "id": "c"}, {"t": "Decágono.", "e": "Decágono tem 10 lados.", "id": "d"}]}, {"tema": "Gema 4 · Regular", "p": "Um polígono é <b>regular</b> quando…", "alts": [{"t": "todos os lados têm a mesma medida e todos os ângulos internos têm a mesma medida.", "e": "São as duas condições juntas.", "ok": true, "id": "a"}, {"t": "apenas os lados têm a mesma medida.", "e": "Falta a condição dos ângulos iguais.", "id": "b"}, {"t": "apenas os ângulos internos têm a mesma medida.", "e": "Falta a condição dos lados iguais (o retângulo comprido é um exemplo).", "id": "c"}, {"t": "tem exatamente quatro lados.", "e": "O número de lados não define se é regular.", "id": "d"}]}, {"tema": "Gema 5 · Lados", "p": "Um triângulo tem lados de <b>6 cm, 6 cm e 4 cm</b>. Quanto aos lados, ele é:", "alts": [{"t": "isósceles.", "e": "Tem dois lados com a mesma medida (6 cm).", "ok": true, "id": "a"}, {"t": "equilátero.", "e": "Equilátero teria os três lados iguais.", "id": "b"}, {"t": "escaleno.", "e": "Escaleno teria os três lados diferentes.", "id": "c"}, {"t": "obtusângulo, porque tem dois lados iguais.", "e": "Obtusângulo é classificação pelos ângulos, e ter lados iguais não diz isso.", "id": "d"}]}, {"tema": "Gema 6 · Ângulos", "p": "Um triângulo tem ângulos de <b>120°, 30° e 30°</b>. Quanto aos ângulos, ele é:", "alts": [{"t": "obtusângulo.", "e": "Tem um ângulo obtuso (120°, maior que 90°).", "ok": true, "id": "a"}, {"t": "acutângulo.", "e": "Acutângulo teria os três ângulos menores que 90°.", "id": "b"}, {"t": "retângulo.", "e": "Retângulo teria um ângulo de 90°.", "id": "c"}, {"t": "equilátero.", "e": "Equilátero é classificação pelos lados, e seus ângulos seriam todos iguais.", "id": "d"}]}, {"tema": "Gema 5 · Pegadinha", "p": "Qual frase está <b>correta</b>?", "alts": [{"t": "Todo triângulo equilátero é também isósceles.", "e": "Está no livro: o equilátero tem dois (e até três) lados iguais.", "ok": true, "id": "a"}, {"t": "Todo triângulo isósceles é também equilátero.", "e": "Não: o isósceles pode ter o terceiro lado diferente.", "id": "b"}, {"t": "No triângulo escaleno, dois ângulos são iguais.", "e": "No escaleno os três ângulos são diferentes.", "id": "c"}, {"t": "O triângulo tem três diagonais.", "e": "O triângulo é o único polígono convexo sem diagonais.", "id": "d"}]}, {"tema": "Gema 7 · Trapézios", "p": "O trapézio que tem <b>dois ângulos internos retos</b> é o:", "alts": [{"t": "trapézio retângulo.", "e": "Dois ângulos de 90° = trapézio retângulo.", "ok": true, "id": "a"}, {"t": "trapézio isósceles.", "e": "No isósceles, os lados não paralelos são congruentes.", "id": "b"}, {"t": "trapézio escaleno.", "e": "No escaleno, os lados transversais têm medidas diferentes.", "id": "c"}, {"t": "quadrilátero qualquer.", "e": "Quadrilátero qualquer não tem lados paralelos; o trapézio tem.", "id": "d"}]}, {"tema": "Gema 8 · Paralelogramos", "p": "Sobre o <b>quadrado</b>, é correto dizer que ele é:", "alts": [{"t": "ao mesmo tempo um retângulo e um losango.", "e": "Tem ângulos retos (retângulo) e lados iguais (losango).", "ok": true, "id": "a"}, {"t": "apenas um retângulo.", "e": "Ele também é losango, porque os quatro lados são iguais.", "id": "b"}, {"t": "apenas um losango.", "e": "Ele também é retângulo, porque os quatro ângulos são retos.", "id": "c"}, {"t": "um quadrilátero sem lados paralelos.", "e": "O quadrado tem dois pares de lados paralelos.", "id": "d"}]}, {"tema": "Gema 10 · Porcentagem de um valor", "p": "Quanto é <b>25% de 80</b>?", "alts": [{"t": "20", "e": "25% = 1/4, e 80 : 4 = 20.", "ok": true, "id": "a"}, {"t": "25", "e": "25 é a porcentagem, não o resultado.", "id": "b"}, {"t": "40", "e": "40 é 50% de 80 (a metade).", "id": "c"}, {"t": "32", "e": "32 é 40% de 80.", "id": "d"}]}, {"tema": "Gema 12 · Decimais", "p": "Como se escreve <b>7%</b> na forma de número decimal?", "alts": [{"t": "0,07", "e": "7/100 = 0,07 (vírgula duas casas para a esquerda).", "ok": true, "id": "a"}, {"t": "0,7", "e": "0,7 = 70%.", "id": "b"}, {"t": "7,0", "e": "7,0 = 700%.", "id": "c"}, {"t": "0,007", "e": "0,007 = 0,7%.", "id": "d"}]}, {"tema": "Gema 11 · Descobrir o total", "p": "Numa caixa, <b>21 lápis</b> são azuis, e eles são <b>70%</b> dos lápis. Quantos lápis há na caixa?", "alts": [{"t": "30", "e": "70% → 21; 10% → 3; 100% → 30.", "ok": true, "id": "a"}, {"t": "21", "e": "21 é só a parte azul (70%).", "id": "b"}, {"t": "14,7", "e": "14,7 seria 70% de 21, conta ao contrário.", "id": "c"}, {"t": "27", "e": "27 seria 90% de 30.", "id": "d"}]}, {"tema": "Gema 15 · Prismas", "p": "Quantas <b>faces</b> tem um <b>prisma de base pentagonal</b>?", "alts": [{"t": "7", "e": "Faces do prisma = n + 2 = 5 + 2 = 7.", "ok": true, "id": "a"}, {"t": "6", "e": "6 seria a pirâmide de base pentagonal (n + 1).", "id": "b"}, {"t": "10", "e": "10 é o número de vértices (2 · 5).", "id": "c"}, {"t": "15", "e": "15 é o número de arestas (3 · 5).", "id": "d"}]}, {"tema": "Gema 16 · Plano cartesiano", "p": "Para marcar o ponto <b>(3; 5)</b> a partir da origem, você:", "alts": [{"t": "anda 3 unidades para a direita (eixo x) e sobe 5 (eixo y).", "e": "O 1º número é a abscissa (x) e o 2º, a ordenada (y).", "ok": true, "id": "a"}, {"t": "sobe 3 unidades e anda 5 para a direita.", "e": "Isso marca o ponto (5; 3); a ordem foi trocada.", "id": "b"}, {"t": "anda 8 unidades para a direita.", "e": "Não se somam as coordenadas.", "id": "c"}, {"t": "sobe 5 unidades, porque o 5 é a abscissa.", "e": "O 5 é a ordenada; a abscissa é o 3.", "id": "d"}]}];
+var SEMENTE=2710266;var ETAPA="quiz";var NOME_ETAPA="o Quiz";var PREFIXO="MED";
+function mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; var t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+var rnd=mulberry32(SEMENTE);
+Q.forEach(function(q){ var arr=q.alts.slice(); for(var i=arr.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)); var tmp=arr[i]; arr[i]=arr[j]; arr[j]=tmp; } q.ordem=arr; });
+var CHAVE=KIT+'_'+ETAPA+'_v1'; var mem={}; var estado=carregar();
+function carregar(){ try{ var s=localStorage.getItem(CHAVE); if(s) return JSON.parse(s);}catch(e){ if(mem[CHAVE]) return JSON.parse(mem[CHAVE]); } return {resp:{},enviado:false}; }
+function salvar(){ var s=JSON.stringify(estado); try{ localStorage.setItem(CHAVE,s);}catch(e){ mem[CHAVE]=s; } var d=new Date(); document.getElementById('salvo').textContent='💾 Salvo às '+d.toLocaleTimeString('pt-BR')+' de '+d.toLocaleDateString('pt-BR'); }
+var LETRAS='ABCDEFGHJKLMNPQRSTUVWXYZ';
+function gerarCodigo(ac){ var xx=(ac<10?'0':'')+ac; var yy=LETRAS[Math.floor(Math.random()*LETRAS.length)]+LETRAS[Math.floor(Math.random()*LETRAS.length)]; return PREFIXO+'-'+xx+'-'+yy; }
+function acertou(i){ var q=Q[i]; var a=q.alts.filter(function(x){return x.id===estado.resp[i];})[0]; return !!(a&&a.ok); }
+function render(){
+  var c=document.getElementById('questoes'); var h=''; var G=estado.gabarito;
+  Q.forEach(function(q,i){
+    var etiqueta = q.tipo ? '<span class="tipo '+q.tipo+'">'+(q.tipo==='rom'?'Números romanos':'Múltipla escolha')+'</span>' : '<span class="tema">'+q.tema+'</span>';
+    h+='<div class="q" id="q'+i+'">'+etiqueta+'<div class="num">Questão '+(i+1)+' de '+Q.length+'</div><h3>'+q.p+'</h3>';
+    if(q.itens){ q.itens.forEach(function(it){ var cls='afirm'+(G?(it.ok?' ok':' no'):''); h+='<div class="'+cls+'"><b>'+it.n+'.</b> '+it.t+(G?'<div class="exp show">'+(it.ok?'✅ ':'❌ ')+it.e+'</div>':'')+'</div>'; }); }
+    q.ordem.forEach(function(a,k){
+      var letra='abcd'[k]; var sel=estado.resp[i]===a.id; var cls='alt'+(sel?' sel':'');
+      if(G){ if(a.ok) cls+=' certa'; else if(sel) cls+=' marcada-errada'; else cls+=' errada'; }
+      h+='<label class="'+cls+'"><input type="radio" name="q'+i+'" value="'+a.id+'" '+(sel?'checked':'')+' '+(estado.enviado?'disabled':'')+' onchange="marcar('+i+',\''+a.id+'\')"> <b>'+letra+')</b> '+a.t+(G?'<div class="exp show">'+(a.ok?'✅ Correta: ':'❌ ')+a.e+'</div>':'')+'</label>';
+    });
+    h+='</div>';
+  });
+  c.innerHTML=h; atualizarBarra(); if(estado.enviado) mostrarEnviado(); atualizarTrilhaFim();
+}
+function marcar(i,id){ if(estado.enviado) return; estado.resp[i]=id; salvar(); var q=document.getElementById('q'+i); var labs=q.querySelectorAll('.alt'); for(var k=0;k<labs.length;k++){ labs[k].classList.toggle('sel', labs[k].querySelector('input').value===id); } atualizarBarra(); }
+function atualizarBarra(){ var n=Object.keys(estado.resp).length; document.getElementById('barra').style.width=(n/Q.length*100)+'%'; var b=document.getElementById('btn-enviar'); if(!estado.enviado){ b.disabled=n<Q.length; b.textContent=n<Q.length?'📨 Enviar respostas ('+n+' de '+Q.length+' respondidas)':'📨 Enviar respostas'; } }
+function enviar(){
+  if(estado.enviado) return; if(Object.keys(estado.resp).length<Q.length) return;
+  var ac=0, erros=[]; Q.forEach(function(q,i){ if(acertou(i)) ac++; else erros.push(i+1); });
+  estado.acertos=ac; estado.total=Q.length; estado.erros=erros; estado.codigo=gerarCodigo(ac); estado.enviado=true; estado.concluido=true; estado.concluidoEm=new Date().toISOString();
+  salvar(); render(); window.scrollTo({top:0,behavior:'smooth'});
+}
+function mostrarEnviado(){
+  var b=document.getElementById('btn-enviar'); b.disabled=true; b.textContent='✅ Enviado — respostas travadas ('+estado.acertos+' de '+Q.length+')';
+  document.getElementById('codigo').classList.add('show'); document.getElementById('cod').textContent=estado.codigo;
+  document.getElementById('codtxt').textContent='Anote este código para os pais. Ele abre o gabarito comentado aqui e o relatório no Início.';
+  document.getElementById('gab').classList.add('show');
+  var f=document.getElementById('fim'); if(f) f.style.display='block';
+}
+function abrirGab(){ var v=document.getElementById('gab-in').value.trim().toUpperCase(); var m=document.getElementById('gab-msg'); if(estado.enviado && (v===estado.codigo||v==='PAIS-77')){ estado.gabarito=true; salvar(); render(); document.getElementById('gab-msg').innerHTML='<span style="color:#8ff0c8">Gabarito liberado: '+estado.acertos+' acertos de '+Q.length+'.</span>'; } else { m.innerHTML='<span style="color:#ffc2cd">Código incorreto.</span>'; } }
+function atualizarTrilhaFim(){
+  var box=document.getElementById('trilha-fim'); if(!box){ marcarNav(); return; }
+  var txt=document.getElementById('trilha-fim-txt'), btn=document.getElementById('btn-prox'); var h3=box.querySelector('h3');
+  if(estado.concluido||trilhaLiberada()){ h3.textContent='✅ Quiz enviado — Resumo destravado!'; txt.textContent=estado.concluido?'Agora use o Resumo para fechar as dúvidas que o Quiz mostrou.':'Trilha liberada pelos pais.'; btn.classList.remove('off'); }
+  else { h3.textContent='🔒 Próxima etapa: Resumo'; txt.textContent='Destrava quando você enviar o Quiz.'; btn.classList.add('off'); }
+  marcarNav();
+}
+function exportar(){ var blob=new Blob([JSON.stringify(estado,null,2)],{type:'application/json'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=ETAPA+'_lapidario.json'; a.click(); }
+function importar(ev){ var f=ev.target.files[0]; if(!f) return; var r=new FileReader(); r.onload=function(){ try{ estado=JSON.parse(r.result); if(!estado.resp) estado.resp={}; salvar(); render(); mostrarModal('✅ Progresso importado!',false);}catch(e){ mostrarModal('❌ Arquivo inválido.',false);} }; r.readAsText(f); }
+var acaoZerar=null;
+function pedirZerar(){ acaoZerar=true; mostrarModal('Apagar as respostas? (Se já foi enviado, o código e a conclusão são mantidos.)',true); }
+function mostrarModal(txt,confirmar){ document.getElementById('modal-txt').innerHTML=txt; document.getElementById('modal').classList.add('show'); document.getElementById('modal-cancel').style.display=confirmar?'inline-block':'none'; document.getElementById('modal-ok').textContent=confirmar?'Sim, apagar':'Ok';
+  document.getElementById('modal-ok').onclick=function(){ if(confirmar&&acaoZerar){ acaoZerar=null; if(!estado.enviado){ estado={resp:{},enviado:false}; salvar(); render(); fecharModal(); } else { mostrarModal('Já foi enviado: as respostas ficam travadas. Para refazer do zero, use "Zerar o kit inteiro" no relatório do Início (código PAIS-77).',false); } return; } fecharModal(); }; }
+function fecharModal(){ document.getElementById('modal').classList.remove('show'); }
+if(checarTrava(ETAPA, NOME_ETAPA)){ render(); } else { marcarNav(); }
+
+</script>
+</body>
+</html>

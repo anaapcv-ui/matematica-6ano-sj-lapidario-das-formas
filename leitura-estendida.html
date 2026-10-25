@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leitura Estendida · Lapidário das Formas · Matemática 6º</title>
+<style>
+:root{--palco:#13111c;--palco2:#1d1a2e;--aco:#2e2947;--aco2:#453d66;--ambar:#fbbf24;--magenta:#60a5fa;--ciano:#a78bfa;--verde:#34d399;--vermelho:#fb7185;--texto:#ece9f7;--cinza:#9b96b5}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,Arial,sans-serif;background:radial-gradient(1000px 480px at 50% -10%,#2a1f4f,#13111c 62%),var(--palco);color:var(--texto);line-height:1.6;padding-bottom:60px}
+header{background:linear-gradient(120deg,#1b1336,#2b1d52 55%,#13233d);padding:26px 18px;text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.5);border-bottom:4px solid var(--ciano)}
+header .selo{font-size:.76rem;letter-spacing:2px;color:#d9ccff;text-transform:uppercase}
+header h1{font-size:1.55rem;margin:6px 0 2px}
+header p{color:#d8d2ee;font-size:.9rem}
+.wrap{max-width:840px;margin:0 auto;padding:16px}
+.barra-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0}
+.barra-nav a{background:var(--palco2);color:var(--texto);text-decoration:none;padding:7px 12px;border-radius:20px;font-size:.85rem;border:1px solid var(--aco)}
+.barra-nav a.on{background:var(--ciano);color:#1a1033;font-weight:bold}
+.barra-nav a.lock{opacity:.5}
+.intro{background:var(--palco2);border:1px solid var(--aco);border-radius:14px;padding:16px;margin-bottom:16px}
+.intro h2{color:var(--ciano);font-size:1.1rem;margin-bottom:8px}
+.intro ol{margin:8px 0 0 20px}
+.painel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;background:var(--palco2);border:1px solid var(--aco);border-radius:12px;padding:10px 14px;margin-bottom:16px;font-size:.85rem}
+.painel .btns{display:flex;gap:6px;flex-wrap:wrap}
+button{cursor:pointer;font-family:inherit}
+.mini{background:var(--palco);color:var(--texto);border:1px solid var(--aco2);border-radius:8px;padding:6px 10px;font-size:.8rem}
+.mini:hover{background:#262040}
+.fig{margin:10px 0;text-align:center;background:#16132a;border:1px solid var(--aco);border-radius:12px;padding:10px}
+.fig .cap{font-size:.8rem;color:var(--cinza);margin-top:4px}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th,td{border:1px solid var(--aco);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:#231e3d}
+.mini-t{margin:6px 0 12px}
+.trilha-fim{background:linear-gradient(120deg,#0f2a22,#123a2d);border:2px solid var(--verde);border-radius:16px;padding:18px;margin-top:18px;text-align:center}
+.trilha-fim h3{color:#8ff0c8;margin-bottom:8px}
+.trilha-fim a.btn{display:inline-block;margin-top:8px;background:var(--verde);color:#052a1c;text-decoration:none;font-weight:bold;padding:11px 20px;border-radius:10px}
+.trilha-fim a.btn.off{background:#262040;color:#76709a;pointer-events:none}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(5,3,12,.86);z-index:50;align-items:center;justify-content:center;padding:16px}
+.modal-bg.show{display:flex}
+.modal{background:var(--palco2);border:1px solid var(--ciano);border-radius:14px;padding:20px;max-width:430px;text-align:center}
+.modal .big{font-size:2.4rem}
+.modal p{margin-bottom:14px}
+.modal button,.modal a{display:inline-block;background:var(--ciano);color:#1a1033;border:none;border-radius:8px;padding:9px 16px;font-weight:bold;text-decoration:none;margin:3px}
+.modal button.sec{background:#2e2947;color:var(--texto)}
+.rodape{text-align:center;color:var(--cinza);font-size:.8rem;margin-top:24px}
+
+.mapa{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;background:var(--palco2);border:1px solid var(--aco);border-radius:14px;padding:12px;margin-bottom:14px}
+.mapa a{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-weight:bold;font-size:.85rem;background:#16132a;color:#6f6990;border:1px solid var(--aco)}
+.mapa a.feita{background:linear-gradient(135deg,#7c5cf0,#34d399);color:#fff;border-color:#a78bfa;box-shadow:0 0 10px rgba(167,139,250,.45)}
+.mapa a.atual{border:2px solid var(--ambar);color:var(--ambar)}
+.mapa .leg{width:100%;text-align:center;font-size:.8rem;color:var(--cinza)}
+.progresso{height:10px;background:var(--aco);border-radius:6px;overflow:hidden;margin-bottom:16px}
+.progresso div{height:100%;background:linear-gradient(90deg,#a78bfa,#34d399);width:0;transition:width .3s}
+.bloco{background:var(--palco2);border:1px solid var(--aco);border-radius:16px;margin-bottom:18px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.35)}
+.bloco.travado{opacity:.55}
+.bloco-cab{display:flex;align-items:center;gap:12px;padding:14px 16px;background:linear-gradient(90deg,#211b3d,#2a2250);border-bottom:1px solid var(--aco)}
+.bloco-cab .num{background:var(--ciano);color:#1a1033;font-weight:bold;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:rotate(45deg)}
+.bloco-cab .num span{transform:rotate(-45deg)}
+.bloco.m7 .bloco-cab .num{background:var(--ambar);color:#2a1d00}
+.bloco.m8 .bloco-cab .num{background:var(--magenta);color:#06203f}
+.bloco-cab h3{font-size:1.05rem;color:#fff}
+.bloco-cab .porto{font-size:.7rem;color:var(--cinza);letter-spacing:1px;text-transform:uppercase}
+.bloco-corpo{padding:16px}
+.texto p{margin-bottom:10px}
+.texto ul{margin:0 0 10px 20px}
+.texto li{margin-bottom:5px}
+.texto .destaque{color:var(--ciano);font-weight:bold}
+.bloco.m7 .texto .destaque{color:var(--ambar)}
+.bloco.m8 .texto .destaque{color:var(--magenta)}
+.olhar{background:#2a2108;border-left:3px solid var(--ambar);padding:8px 12px;margin:0 0 10px;border-radius:0 8px 8px 0;font-size:.92rem}
+.olhar b{color:var(--ambar)}
+.cadeado{padding:22px 16px;text-align:center;color:var(--cinza);font-size:.9rem}
+.perg{background:#17142b;border:1px solid var(--aco);border-radius:12px;padding:12px;margin-top:14px}
+.perg.red{border-color:var(--vermelho);box-shadow:0 0 0 1px var(--vermelho)}
+.perg .tag{display:inline-block;font-size:.66rem;text-transform:uppercase;letter-spacing:1px;padding:2px 8px;border-radius:10px;margin-bottom:6px}
+.tag.conc{background:#2f2560;color:#d4c8ff}
+.tag.apl{background:#11402f;color:#a8f0d2}
+.perg label{display:block;font-weight:600;margin-bottom:8px}
+.perg textarea{width:100%;min-height:72px;background:#0f0d1c;color:var(--texto);border:1px solid var(--aco2);border-radius:8px;padding:9px;font-family:inherit;font-size:.95rem;resize:vertical}
+.aviso{margin-top:8px;padding:9px 11px;border-radius:8px;font-size:.85rem;display:none}
+.aviso.amarelo{display:block;background:#463812;border:1px solid var(--ambar);color:#ffe9ad}
+.aviso.vermelho{display:block;background:#4a1724;border:1px solid var(--vermelho);color:#ffd0d8}
+.modelo{margin-top:10px;padding:10px 12px;background:#0f2a22;border:1px solid var(--verde);border-radius:8px;font-size:.9rem;display:none}
+.modelo.show{display:block}
+.modelo .lab{color:#8ff0c8;font-weight:bold;font-size:.78rem;text-transform:uppercase;letter-spacing:1px}
+.chk{margin-top:10px;font-size:.88rem}
+.chk .item{display:flex;align-items:center;gap:8px;margin:6px 0;flex-wrap:wrap}
+.chk .item span{flex:1;min-width:180px}
+.chk .simnao button{border:1px solid var(--aco2);background:#0f0d1c;color:var(--texto);border-radius:6px;padding:4px 10px;margin-left:4px;font-size:.8rem}
+.chk .simnao button.sim.ativo{background:var(--verde);border-color:var(--verde);color:#052a1c}
+.chk .simnao button.nao.ativo{background:var(--vermelho);border-color:var(--vermelho);color:#2a0710}
+.conferir{margin-top:14px;background:var(--verde);color:#052a1c;border:none;border-radius:10px;padding:11px 18px;font-size:1rem;font-weight:bold;width:100%}
+.conferir:disabled{background:#262040;color:#76709a;cursor:not-allowed}
+.status-bloco{margin-top:10px;text-align:center;font-weight:bold;font-size:.95rem}
+.prox{margin-top:12px;text-align:center}
+.prox a{color:var(--ciano);text-decoration:none;font-weight:bold}
+.peg{background:#3a1420;border:2px solid var(--vermelho);border-radius:16px;padding:16px;margin-top:20px}
+.peg h3{color:#ffc2cd;margin-bottom:10px}
+.peg ol{margin-left:20px}
+.peg li{margin-bottom:7px}
+.cobertura{background:var(--palco2);border:1px solid var(--aco);border-radius:16px;padding:16px;margin-top:18px}
+.cobertura h3{color:var(--ciano);margin-bottom:10px}
+.revisar{background:#352a08;border:2px solid var(--ambar);border-radius:16px;padding:16px;margin-top:18px}
+.revisar h3{color:var(--ambar);margin-bottom:8px}
+.revisar ul{margin-left:18px}
+.relatorio{background:var(--palco2);border:1px dashed var(--ciano);border-radius:14px;padding:16px;margin-top:18px;font-size:.9rem}
+.relatorio h3{color:var(--ciano);margin-bottom:8px}
+.coroa{display:none;text-align:center;background:linear-gradient(135deg,#2b1d52,#0f2a22);border:2px solid var(--ambar);border-radius:16px;padding:18px;margin-top:18px}
+.coroa.show{display:block;animation:pulse 1.4s ease-in-out 3}
+.coroa .big{font-size:2.6rem}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 rgba(251,191,36,0)}50%{box-shadow:0 0 26px rgba(251,191,36,.55)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="selo">Lapidário das Formas · Matemática 6º ano · Colégio São José</div>
+  <h1>📖 Leitura Estendida</h1>
+  <p>16 gemas para lapidar · Prova 27/10 · Ecos Matemática 6 (SM) · Mód. 6 pp. 262-280 · Mód. 7 pp. 312-332 · Mód. 8 pp. 340-343, 360, 361 e 371</p>
+</header>
+<div class="wrap">
+  <nav class="barra-nav" id="nav"><a class="on" href="leitura-estendida.html">📖 Leitura Estendida</a><a href="quiz.html" data-etapa="quiz">🎯 Quiz</a><a href="resumo.html" data-etapa="resumo">🗺️ Resumo</a><a href="simulado.html" data-etapa="simulado">📝 Simulado</a><a href="index.html">🏠 Início</a></nav>
+  <div class="intro">
+    <h2>💎 Bem-vindo(a) à bancada do lapidário</h2>
+    <p>Você é o <b>lapidário</b>: cada bloco é uma <b>gema</b> para lapidar. As gemas roxas são do <b>Desenho e construção</b> (polígonos, triângulos e quadriláteros), as douradas são da <b>porcentagem</b> e as azuis são dos <b>poliedros e do plano cartesiano</b>. Tudo vem do seu livro (Ecos Matemática 6), e as páginas estão no topo de cada gema.</p>
+    <ol>
+      <li>Leia a gema com calma.</li>
+      <li>Responda as 3 perguntas <b>escrevendo com as suas palavras</b> (e fazendo as contas). Não vale copiar do texto.</li>
+      <li>Clique em <b>Conferir</b>: aparecem a resposta-modelo e uma autoavaliação Sim/Não. A próxima gema abre.</li>
+      <li>Com as 16 gemas conferidas e a autoavaliação respondida, o <b>🎯 Quiz destrava</b>.</li>
+    </ol>
+  </div>
+  <div class="painel">
+    <span id="salvo">💾 Progresso salvo automaticamente.</span>
+    <div class="btns">
+      <button class="mini" onclick="exportar()">📥 Exportar</button>
+      <button class="mini" onclick="document.getElementById('imp').click()">📤 Importar</button>
+      <input type="file" id="imp" accept="application/json" style="display:none" onchange="importar(event)">
+      <button class="mini" onclick="pedirZerar()">🗑️ Zerar tudo</button>
+    </div>
+  </div>
+  <div class="mapa" id="mapa"></div>
+  <div class="progresso"><div id="barra"></div></div>
+  <div id="blocos"></div>
+  <div class="peg">
+    <h3>⚠️ 12 Pegadinhas da prova (não caia nelas!)</h3>
+    <ol><li><b>Linha que se cruza é NÃO simples</b>, mesmo sendo fechada (como o 8). E figura com cruzamento não é polígono.</li><li><b>Lado curvo nunca é polígono:</b> círculo, oval e gota ficam fora.</li><li><b>Basta UM segmento AB passar por fora</b> para o polígono (ou poliedro) ser não convexo.</li><li><b>Diagonal liga vértices NÃO consecutivos.</b> No ABCDE, AB é lado; AC é diagonal.</li><li><b>Regular exige lados iguais E ângulos iguais.</b> O retângulo comprido não é regular.</li><li><b>Todo equilátero é isósceles</b>, mas nem todo isósceles é equilátero.</li><li><b>Ângulo de 90° = retângulo; maior que 90° = obtusângulo.</b> Não confunda triângulo retângulo com o quadrilátero retângulo.</li><li><b>O quadrado é retângulo E losango</b> ao mesmo tempo.</li><li><b>7% = 0,07 (e não 0,7).</b> Porcentagem para decimal: vírgula duas casas para a esquerda.</li><li><b>Desconto de 20% → você paga 80%.</b> Aumento → soma ao valor inicial.</li><li><b>Prisma: faces = n + 2. Pirâmide: faces = n + 1</b> (n = vértices do polígono da base).</li><li><b>(2; 0) ≠ (0; 2).</b> Primeiro vem a abscissa (x), depois a ordenada (y).</li></ol>
+  </div>
+  <div class="cobertura">
+    <h3>🧭 Tópico da prova → Gema</h3>
+    <table><tr><th>Tópico (página do livro)</th><th>Onde estudar</th></tr><tr><td>Linhas poligonais, abertas/fechadas, simples/não simples, regiões planas, sólidos (pp. 262-263)</td><td>Gema 1</td></tr><tr><td>Polígonos; convexos e não convexos (p. 263)</td><td>Gema 2</td></tr><tr><td>Elementos dos polígonos: vértice, lado, diagonal, ângulo interno (p. 264)</td><td>Gema 3</td></tr><tr><td>Nomenclatura dos polígonos e polígonos regulares (p. 268); perímetro de regulares (p. 278)</td><td>Gema 4</td></tr><tr><td>Triângulos: elementos e classificação quanto aos lados (p. 269)</td><td>Gema 5</td></tr><tr><td>Triângulos: classificação quanto aos ângulos (p. 269; exercícios pp. 278-279)</td><td>Gema 6</td></tr><tr><td>Quadriláteros, notável × qualquer, trapézios (p. 270)</td><td>Gema 7</td></tr><tr><td>Paralelogramos: retângulo, losango, quadrado; diagrama de inclusão (p. 271)</td><td>Gema 8</td></tr><tr><td>Definição de porcentagem, fração centesimal, permilagem (p. 312)</td><td>Gema 9</td></tr><tr><td>Porcentagem de uma quantidade; cálculo mental com 10% e 1% (pp. 313, 319, 325)</td><td>Gema 10</td></tr><tr><td>A porcentagem e as frações: descobrir o total (problemas) (pp. 314-315, 325-326)</td><td>Gema 11</td></tr><tr><td>A porcentagem e os decimais; percentuais não exatos (pp. 316-318, 326-327)</td><td>Gema 12</td></tr><tr><td>Aplicações: descontos, aumentos, calculadora, partes (pp. 319-322, 327-332)</td><td>Gema 13</td></tr><tr><td>Poliedros e corpos redondos; elementos; convexos; nomenclatura (pp. 340-341)</td><td>Gema 14</td></tr><tr><td>Prismas e pirâmides; relações; planificação (pp. 342-343)</td><td>Gema 15</td></tr><tr><td>Plano cartesiano: pares ordenados, eixos, coordenadas, vértices de polígonos (pp. 360-361, 371)</td><td>Gema 16</td></tr></table>
+  </div>
+  <div class="revisar" id="revisar" style="display:none">
+    <h3>🔁 Para revisar</h3>
+    <ul id="revisar-lista"></ul>
+  </div>
+  <div class="relatorio">
+    <h3>📊 Resumo para os pais (desta leitura)</h3>
+    <div id="rel-conteudo"></div>
+  </div>
+  <div class="coroa" id="coroa"><div class="big">👑💎</div><h3>Coroa completa!</h3><p>Você lapidou as 16 gemas. Agora vá ao Quiz testar o brilho delas.</p></div>
+  <div class="trilha-fim" id="trilha-fim">
+    <h3>🔒 Próxima etapa: Quiz</h3>
+    <p id="trilha-fim-txt">O Quiz destrava quando você concluir a leitura.</p>
+    <a class="btn off" id="btn-prox" href="quiz.html">🎯 Ir para o Quiz</a>
+  </div>
+  <div class="rodape">Feito com carinho para o jovem aprendiz. 💎</div>
+</div>
+<div class="modal-bg" id="modal"><div class="modal"><p id="modal-txt"></p><button id="modal-ok">Ok</button><button class="sec" id="modal-cancel" onclick="fecharModal()" style="display:none">Cancelar</button></div></div>
+<script>
+
+var KIT='lapidario_mat6sj';
+var TRILHA=[
+ {id:'leitura', chave:KIT+'_leitura_v1', nome:'Leitura Estendida', arquivo:'leitura-estendida.html', emoji:'📖'},
+ {id:'quiz', chave:KIT+'_quiz_v1', nome:'Quiz', arquivo:'quiz.html', emoji:'🎯'},
+ {id:'resumo', chave:KIT+'_resumo_v1', nome:'Resumo', arquivo:'resumo.html', emoji:'🗺️'},
+ {id:'simulado', chave:KIT+'_simulado_v1', nome:'Simulado', arquivo:'simulado.html', emoji:'📝'}
+];
+var NBLOCOS=16;
+function lerJSON(k){ try{ var s=localStorage.getItem(k); return s?JSON.parse(s):null; }catch(e){ return null; } }
+function trilhaLiberada(){ var t=lerJSON(KIT+'_trilha_v1'); return !!(t&&t.liberadoPelosPais); }
+function etapaConcluida(id){ var e=TRILHA.filter(function(t){return t.id===id;})[0]; var d=lerJSON(e.chave); return !!(d&&d.concluido); }
+function podeAbrir(id){ var idx=TRILHA.map(function(t){return t.id;}).indexOf(id); if(idx<=0||trilhaLiberada()) return true; return etapaConcluida(TRILHA[idx-1].id); }
+function marcarNav(){
+  var links=document.querySelectorAll('#nav a[data-etapa]');
+  for(var i=0;i<links.length;i++){ var id=links[i].getAttribute('data-etapa'); var t=links[i].textContent.replace('🔒 ','');
+    if(!podeAbrir(id)){ links[i].classList.add('lock'); links[i].textContent='🔒 '+t; links[i].setAttribute('title','Ainda trancado'); }
+    else { links[i].classList.remove('lock'); links[i].textContent=t; links[i].removeAttribute('title'); } }
+}
+function faltaTexto(id){ /* o que falta no material ANTERIOR para abrir este */
+  var idx=TRILHA.map(function(t){return t.id;}).indexOf(id); var ant=TRILHA[idx-1]; var d=lerJSON(ant.chave)||{};
+  if(ant.id==='leitura'){ var p=d.progresso||{conferidos:0,total:NBLOCOS,chkPendentes:0}; var f=p.total-p.conferidos; return f>0? 'conclua a Leitura Estendida (faltam '+f+' de '+p.total+' gemas)' : 'responda a autoavaliação Sim/Não da Leitura Estendida ('+p.chkPendentes+' ponto(s) pendente(s))'; }
+  if(ant.id==='quiz'){ var n=d.resp?Object.keys(d.resp).length:0; return 'envie o Quiz ('+n+' de 15 respondidas)'; }
+  if(ant.id==='resumo'){ return 'leia o Resumo até o fim e clique em "Li o resumo até o fim" (rolagem: '+Math.round(d.rolagemMax||0)+'%)'; }
+  return 'conclua '+ant.nome;
+}
+function checarTrava(id,nome){
+  if(podeAbrir(id)) return true;
+  document.getElementById('lock-txt').textContent='Para abrir '+nome+', '+faltaTexto(id)+'.';
+  document.getElementById('lock').classList.add('show');
+  var w=document.querySelector('.wrap'); w.style.filter='blur(7px)'; w.style.pointerEvents='none'; w.setAttribute('aria-hidden','true');
+  return false;
+}
+
+var BLOCOS=[{"porto": "Gema 1 · Desenho e construção · pp. 262-263", "emoji": "✏️", "u": "m6", "titulo": "Linhas, regiões planas e sólidos", "texto": ["Antes de lapidar uma pedra, o lapidário risca o contorno dela no papel. Para o livro, as figuras geométricas podem ser classificadas olhando para três coisas: <span class='destaque'>linhas</span>, <span class='destaque'>regiões planas</span> e <span class='destaque'>figuras não planas</span>.", "As <b>linhas</b>, em geral, têm <b>uma dimensão só</b> (são unidimensionais). Quando uma linha é formada <b>apenas por segmentos de reta</b>, um depois do outro e sem estarem na mesma reta, ela é uma <span class='destaque'>linha poligonal</span>. Um zigue-zague, por exemplo, é uma linha poligonal.", "Uma linha pode ser <b>aberta</b> (as pontas ficam soltas) ou <b>fechada</b> (o traço volta ao ponto de partida). E pode ser <b>simples</b>, quando <b>não tem cruzamento</b>, ou <b>não simples</b>, quando <b>se cruza</b> em algum ponto. O desenho do número 8 feito sem tirar o lápis, por exemplo, é uma linha fechada e não simples.", "<table class='mini-t'><tr><th></th><th>Simples (sem cruzamento)</th><th>Não simples (com cruzamento)</th></tr><tr><td><b>Aberta</b></td><td>segmento, curva, zigue-zague</td><td>zigue-zague que se cruza</td></tr><tr><td><b>Fechada</b></td><td>contorno de um pentágono, oval</td><td>forma de 8, laço</td></tr></table>", "Uma linha <b>simples e fechada</b> separa um pedaço do plano: é a <span class='destaque'>região plana</span> (por exemplo, um círculo ou um hexágono pintados por dentro). Já as <b>figuras não planas</b> não cabem em um único plano: são os <span class='destaque'>sólidos geométricos</span>, como o cubo, a esfera, a pirâmide e o cilindro.", "<div class='olhar'><b>Olhar de lapidário:</b> para classificar uma linha, faça duas perguntas — <b>ela fecha?</b> (aberta ou fechada) e <b>ela se cruza?</b> (simples ou não simples).</div>"], "perguntas": [{"tag": "conc", "q": "Com as suas palavras, explique a diferença entre uma linha <b>simples</b> e uma <b>não simples</b>, e entre uma linha <b>aberta</b> e uma <b>fechada</b>.", "modelo": "A linha simples não tem nenhum cruzamento; a não simples se cruza em algum ponto. A linha aberta tem as pontas soltas; a fechada volta ao ponto onde começou.", "chk": ["Disse que a simples não se cruza e a não simples se cruza?", "Disse que a fechada volta ao ponto de partida e a aberta não?"]}, {"tag": "apl", "q": "Classifique cada linha em aberta ou fechada e em simples ou não simples: (a) a letra <b>Z</b>; (b) o contorno de um <b>triângulo</b>; (c) o número <b>8</b> desenhado sem tirar o lápis do papel.", "modelo": "(a) Z: aberta e simples (é uma linha poligonal aberta, sem cruzamento). (b) Contorno do triângulo: fechada e simples. (c) Número 8: fechada e não simples, porque se cruza no meio.", "chk": ["Z = aberta e simples?", "Triângulo = fechada e simples?", "8 = fechada e não simples?"]}, {"tag": "apl", "q": "Diga se cada item é <b>linha</b>, <b>região plana</b> ou <b>figura não plana</b>: (a) um dado de jogar; (b) um quadrado desenhado e pintado por dentro; (c) um zigue-zague feito a lápis.", "modelo": "(a) O dado é uma figura não plana (sólido geométrico), porque não cabe em um único plano. (b) O quadrado pintado é uma região plana. (c) O zigue-zague é uma linha (poligonal e aberta).", "chk": ["Dado = figura não plana (sólido)?", "Quadrado pintado = região plana?", "Zigue-zague = linha?"]}]}, {"porto": "Gema 2 · Desenho e construção · p. 263", "emoji": "🔷", "u": "m6", "titulo": "Polígonos convexos e não convexos", "texto": ["Toda pedra lapidada tem faces com contorno reto. No livro, <span class='destaque'>polígono</span> é a figura formada por uma <b>linha poligonal fechada e simples</b> junto com a <b>região interna</b> dela. Ou seja: só segmentos de reta, fechando, sem cruzamento, e com o 'recheio' de dentro.", "Por isso, figuras com <b>lado curvo</b> (como um oval ou uma gota) <b>não são polígonos</b>. Uma figura cujos lados <b>se cruzam</b> também não é polígono, porque a linha não é simples.", "Os polígonos se dividem em dois grupos. Se, para <b>quaisquer</b> dois pontos A e B do interior, o segmento AB fica <b>sempre totalmente dentro</b> do polígono, ele é <span class='destaque'>convexo</span>. Se existir <b>pelo menos um</b> segmento AB que <b>passa por fora</b>, o polígono é <span class='destaque'>não convexo</span> (também chamado de <b>côncavo</b>).", "<div class=\"fig\"><svg viewBox=\"0 0 360 190\" width=\"100%\" style=\"max-width:360px\" role=\"img\"><polygon points=\"40,30 120,20 170,70 140,140 60,145 20,90\" fill=\"#a78bfa\" fill-opacity=\"0.35\" stroke=\"#a78bfa\" stroke-width=\"2\"/><circle cx=\"60\" cy=\"60\" r=\"4\" fill=\"#fbbf24\"/><circle cx=\"140\" cy=\"120\" r=\"4\" fill=\"#fbbf24\"/><line x1=\"60\" y1=\"60\" x2=\"140\" y2=\"120\" stroke=\"#fbbf24\" stroke-width=\"2\"/><text x=\"55\" y=\"55\" fill=\"#fbbf24\" font-size=\"13\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">A</text><text x=\"150\" y=\"125\" fill=\"#fbbf24\" font-size=\"13\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">B</text><text x=\"95\" y=\"175\" fill=\"#34d399\" font-size=\"12\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">Convexo: AB sempre por dentro</text><polygon points=\"230,30 330,30 330,145 290,145 290,70 260,70 260,145 230,145\" fill=\"#fb7185\" fill-opacity=\"0.35\" stroke=\"#fb7185\" stroke-width=\"2\"/><circle cx=\"245\" cy=\"130\" r=\"4\" fill=\"#fbbf24\"/><circle cx=\"310\" cy=\"130\" r=\"4\" fill=\"#fbbf24\"/><line x1=\"245\" y1=\"130\" x2=\"310\" y2=\"130\" stroke=\"#fbbf24\" stroke-width=\"2\" stroke-dasharray=\"5,4\"/><text x=\"240\" y=\"125\" fill=\"#fbbf24\" font-size=\"13\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">A</text><text x=\"318\" y=\"125\" fill=\"#fbbf24\" font-size=\"13\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">B</text><text x=\"280\" y=\"175\" fill=\"#fb7185\" font-size=\"12\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">Não convexo: AB sai da figura</text></svg><div class=\"cap\">Teste do segmento: basta UM segmento AB passar por fora para o polígono ser não convexo.</div></div>", "<div class='olhar'><b>Olhar de lapidário:</b> polígono não convexo costuma ter uma 'entrada', um 'dente' para dentro. Ligue um ponto de cada lado dessa entrada: o segmento escapa.</div>"], "perguntas": [{"tag": "conc", "q": "Quais são as condições para uma figura ser um <b>polígono</b>?", "modelo": "Ela precisa ser formada por uma linha poligonal (só segmentos de reta) que seja fechada e simples, sem cruzamento, junto com a região de dentro.", "chk": ["Falei que só tem segmentos de reta (nada curvo)?", "Falei que a linha é fechada e sem cruzamento?"]}, {"tag": "apl", "q": "Uma placa tem a forma de um <b>círculo</b>. Outra tem a forma de uma <b>estrela de cinco pontas</b>, pintada por dentro e com o contorno sem cruzamentos. Cada uma é polígono? Se for, é convexa ou não convexa? Justifique.", "modelo": "O círculo não é polígono, porque o contorno é curvo. A estrela é polígono (só segmentos de reta, fechada e sem cruzamento) e é não convexa: se eu ligar a ponta de uma estrela à ponta vizinha, o segmento passa por fora da figura.", "chk": ["Disse que o círculo não é polígono por ser curvo?", "Disse que a estrela é polígono não convexo?", "Usei a ideia do segmento que sai da figura?"]}, {"tag": "apl", "q": "Imagine um polígono com a forma da letra <b>L</b> (bem grossa). Ele é convexo? Explique usando o teste do segmento AB.", "modelo": "Não é convexo. Se eu marcar um ponto A no alto da parte vertical do L e um ponto B na ponta da parte de baixo, o segmento AB passa pelo canto vazio, por fora da figura. Basta um segmento sair para o polígono ser não convexo.", "chk": ["Respondi que o L é não convexo?", "Mostrei um segmento AB que passa por fora?"]}]}, {"porto": "Gema 3 · Desenho e construção · p. 264", "emoji": "📐", "u": "m6", "titulo": "Elementos dos polígonos", "texto": ["Todo polígono convexo tem quatro elementos que o lapidário precisa reconhecer de olhos fechados.", "<ul><li><span class='destaque'>Vértice</span>: o ponto comum a dois lados. Usando os vértices, damos nome ao polígono: o polígono de vértices A, B, C, D e E se chama <b>ABCDE</b>.</li><li><span class='destaque'>Lado</span>: cada um dos segmentos de reta consecutivos que formam o contorno. No ABCDE, os lados são AB, BC, CD, DE e EA.</li><li><span class='destaque'>Diagonal</span>: o segmento que liga <b>dois vértices não consecutivos</b> (que não são vizinhos). No ABCDE, as diagonais são AC, AD, BD, BE e CE.</li><li><span class='destaque'>Ângulo interno</span>: o ângulo formado por <b>dois lados consecutivos</b>. No ABCDE: Â, B̂, Ĉ, D̂ e Ê.</li></ul>", "<div class=\"fig\"><svg viewBox=\"0 0 440 185\" width=\"100%\" style=\"max-width:440px\" role=\"img\"><polygon points=\"220,95 170,165 55,140 70,30 185,25\" fill=\"#a78bfa\" fill-opacity=\"0.2\" stroke=\"#a78bfa\" stroke-width=\"2\"/><line x1=\"220\" y1=\"95\" x2=\"55\" y2=\"140\" stroke=\"#fbbf24\" stroke-width=\"1.5\" stroke-dasharray=\"5,4\"/><line x1=\"220\" y1=\"95\" x2=\"70\" y2=\"30\" stroke=\"#fbbf24\" stroke-width=\"1.5\" stroke-dasharray=\"5,4\"/><line x1=\"170\" y1=\"165\" x2=\"70\" y2=\"30\" stroke=\"#fbbf24\" stroke-width=\"1.5\" stroke-dasharray=\"5,4\"/><line x1=\"170\" y1=\"165\" x2=\"185\" y2=\"25\" stroke=\"#fbbf24\" stroke-width=\"1.5\" stroke-dasharray=\"5,4\"/><line x1=\"55\" y1=\"140\" x2=\"185\" y2=\"25\" stroke=\"#fbbf24\" stroke-width=\"1.5\" stroke-dasharray=\"5,4\"/><circle cx=\"220\" cy=\"95\" r=\"4\" fill=\"#ece9f7\"/><text x=\"234\" y=\"99\" fill=\"#ece9f7\" font-size=\"14\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">A</text><circle cx=\"170\" cy=\"165\" r=\"4\" fill=\"#ece9f7\"/><text x=\"176\" y=\"181\" fill=\"#ece9f7\" font-size=\"14\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">B</text><circle cx=\"55\" cy=\"140\" r=\"4\" fill=\"#ece9f7\"/><text x=\"41\" y=\"146\" fill=\"#ece9f7\" font-size=\"14\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">C</text><circle cx=\"70\" cy=\"30\" r=\"4\" fill=\"#ece9f7\"/><text x=\"58\" y=\"26\" fill=\"#ece9f7\" font-size=\"14\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">D</text><circle cx=\"185\" cy=\"25\" r=\"4\" fill=\"#ece9f7\"/><text x=\"193\" y=\"19\" fill=\"#ece9f7\" font-size=\"14\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">E</text><text x=\"320\" y=\"60\" fill=\"#a78bfa\" font-size=\"12\" text-anchor=\"start\" font-family=\"Segoe UI,Arial\">— lados (contorno)</text><text x=\"320\" y=\"85\" fill=\"#fbbf24\" font-size=\"12\" text-anchor=\"start\" font-family=\"Segoe UI,Arial\">- - diagonais</text></svg><div class=\"cap\">Pentágono ABCDE: 5 lados (AB, BC, CD, DE, EA) e 5 diagonais (AC, AD, BD, BE, CE).</div></div>", "<div class='olhar'><b>Olhar de lapidário:</b> lado liga vértices <b>vizinhos</b> (e fica no contorno). Diagonal liga vértices que <b>não são vizinhos</b> (e atravessa a figura).</div>"], "perguntas": [{"tag": "conc", "q": "Qual é a diferença entre um <b>lado</b> e uma <b>diagonal</b> de um polígono?", "modelo": "O lado liga dois vértices consecutivos (vizinhos) e faz parte do contorno. A diagonal liga dois vértices que não são consecutivos e passa por dentro do polígono.", "chk": ["Disse que o lado liga vértices vizinhos (consecutivos)?", "Disse que a diagonal liga vértices não consecutivos?"]}, {"tag": "apl", "q": "Escreva os <b>lados</b> e as <b>diagonais</b> do quadrilátero <b>PQRS</b>.", "modelo": "Lados: PQ, QR, RS e SP. Diagonais: PR e QS.", "chk": ["Escrevi os 4 lados PQ, QR, RS e SP?", "Escrevi as 2 diagonais PR e QS?"]}, {"tag": "apl", "q": "No hexágono <b>ABCDEF</b>, um colega disse que <b>AB</b> é uma diagonal e que <b>AD</b> é um lado. Ele acertou? Corrija o que estiver errado.", "modelo": "Ele errou as duas. AB é lado, porque A e B são vértices vizinhos. AD é diagonal, porque A e D não são vizinhos (entre eles estão B e C).", "chk": ["Disse que AB é lado?", "Disse que AD é diagonal?", "Expliquei pelo fato de os vértices serem ou não vizinhos?"]}]}, {"porto": "Gema 4 · Desenho e construção · p. 268", "emoji": "🏷️", "u": "m6", "titulo": "Nome dos polígonos e polígonos regulares", "texto": ["Os polígonos recebem o nome de acordo com o <b>número de lados</b> (que é igual ao número de ângulos internos). Usar o nome certo já diz muito sobre a forma da figura.", "<table class='mini-t'><tr><th>Lados</th><th>Nome</th><th>Lados</th><th>Nome</th></tr><tr><td>3</td><td>Triângulo</td><td>7</td><td>Heptágono</td></tr><tr><td>4</td><td>Quadrilátero</td><td>8</td><td>Octógono</td></tr><tr><td>5</td><td>Pentágono</td><td>9</td><td>Eneágono</td></tr><tr><td>6</td><td>Hexágono</td><td>10</td><td>Decágono</td></tr></table>", "A palavra <b>polígono</b> vem do grego: <i>poli</i> quer dizer 'muitos' e <i>gonos</i>, conforme o livro, 'lados'. Os nomes usam <b>prefixos numerais</b>, que indicam quantidades (como em <b>tri</b>logia, que são três livros ou filmes).", "Um polígono é <span class='destaque'>regular</span> quando tem <b>todos os lados com a mesma medida</b> E <b>todos os ângulos internos com a mesma medida</b>. Exemplos do livro: triângulo com três ângulos de 60°, quadrado com quatro ângulos de 90°, pentágono com ângulos de 108° e hexágono com ângulos de 120°.", "Nos exercícios do livro (p. 278) aparece o <b>perímetro</b> (a medida do contorno) de polígonos regulares: como os lados são todos iguais, dá para descobrir a medida de um lado dividindo o perímetro pelo número de lados. Uma praça em forma de heptágono regular com perímetro de 42 m tem lados de 42 : 7 = <b>6 m</b>.", "<div class='olhar'><b>Olhar de lapidário:</b> regular exige as DUAS coisas: lados iguais e ângulos iguais. Faltou uma, não é regular.</div>"], "perguntas": [{"tag": "conc", "q": "O que um polígono precisa ter para ser <b>regular</b>? Por que um retângulo comprido (com lados de 2 cm e 6 cm) não é regular?", "modelo": "Precisa ter os lados todos do mesmo tamanho e, ao mesmo tempo, os ângulos todos iguais. O retângulo comprido tem todos os ângulos iguais (90°), mas os lados não são todos iguais, então não é regular.", "chk": ["Citei lados iguais E ângulos iguais?", "Expliquei que no retângulo comprido os lados são diferentes?"]}, {"tag": "apl", "q": "Um terreno tem a forma de um <b>octógono regular</b> com perímetro de <b>96 m</b>. Quanto mede cada lado? E se, com o mesmo perímetro, ele fosse um <b>hexágono regular</b>?", "modelo": "O octógono tem 8 lados: 96 : 8 = 12 m cada lado. O hexágono tem 6 lados: 96 : 6 = 16 m cada lado.", "chk": ["Dividi 96 por 8 e achei 12 m?", "Dividi 96 por 6 e achei 16 m?"]}, {"tag": "apl", "q": "Dê o nome do polígono: (a) com 9 lados; (b) com 7 ângulos internos; (c) com 10 vértices.", "modelo": "(a) Eneágono. (b) Heptágono. (c) Decágono (10 vértices = 10 lados).", "chk": ["9 lados = eneágono?", "7 ângulos = heptágono?", "10 vértices = decágono?"]}]}, {"porto": "Gema 5 · Desenho e construção · p. 269", "emoji": "🔺", "u": "m6", "titulo": "Triângulos: elementos e classificação quanto aos lados", "texto": ["O <span class='destaque'>triângulo</span> é o polígono de <b>três lados</b>, com <b>três vértices</b> e <b>três ângulos internos</b>. Ele é muito usado em construções porque a sua forma <b>não se deforma</b>: numa ponte com estrutura de triângulos as barras ficam firmes, enquanto um varal articulado, feito de quadriláteros, muda de forma quando é puxado ou empurrado.", "Com vértices A, B e C, escrevemos <b>△ABC</b> (lê-se: triângulo ABC). O triângulo é o <b>único polígono convexo que não tem diagonais</b>.", "<b>Quanto aos lados</b>, o triângulo pode ser:<ul><li><span class='destaque'>Escaleno</span>: os três lados têm medidas diferentes (e os três ângulos também são diferentes).</li><li><span class='destaque'>Isósceles</span>: dois lados têm a mesma medida; os dois ângulos formados por esses lados com o terceiro lado também são congruentes (iguais).</li><li><span class='destaque'>Equilátero</span>: os três lados têm a mesma medida, e os três ângulos internos também são congruentes.</li></ul>", "<div class=\"fig\"><svg viewBox=\"0 0 480 195\" width=\"100%\" style=\"max-width:480px\" role=\"img\"><polygon points=\"20,140 150,140 60,40\" fill=\"#a78bfa\" fill-opacity=\"0.35\" stroke=\"#a78bfa\" stroke-width=\"2\"/><text x=\"85\" y=\"170\" fill=\"#a78bfa\" font-size=\"13\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">Escaleno</text><text x=\"85\" y=\"186\" fill=\"#ece9f7\" font-size=\"11\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">3 lados diferentes</text><polygon points=\"190,140 300,140 245,30\" fill=\"#34d399\" fill-opacity=\"0.35\" stroke=\"#34d399\" stroke-width=\"2\"/><text x=\"245\" y=\"170\" fill=\"#34d399\" font-size=\"13\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">Isósceles</text><text x=\"245\" y=\"186\" fill=\"#ece9f7\" font-size=\"11\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">2 lados iguais</text><polygon points=\"340,140 460,140 400,36\" fill=\"#fbbf24\" fill-opacity=\"0.35\" stroke=\"#fbbf24\" stroke-width=\"2\"/><text x=\"400\" y=\"170\" fill=\"#fbbf24\" font-size=\"13\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">Equilátero</text><text x=\"400\" y=\"186\" fill=\"#ece9f7\" font-size=\"11\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">3 lados iguais</text><line x1=\"213\" y1=\"88\" x2=\"221\" y2=\"92\" stroke=\"#ece9f7\" stroke-width=\"2\"/><line x1=\"269\" y1=\"92\" x2=\"277\" y2=\"88\" stroke=\"#ece9f7\" stroke-width=\"2\"/><line x1=\"366\" y1=\"90\" x2=\"374\" y2=\"94\" stroke=\"#ece9f7\" stroke-width=\"2\"/><line x1=\"426\" y1=\"94\" x2=\"434\" y2=\"90\" stroke=\"#ece9f7\" stroke-width=\"2\"/><line x1=\"400\" y1=\"136\" x2=\"400\" y2=\"146\" stroke=\"#ece9f7\" stroke-width=\"2\"/></svg></div>", "<div class='olhar'><b>Olhar de lapidário:</b> em um triângulo, <b>lados de mesma medida ficam de frente para ângulos de mesma medida</b>. As marquinhas iguais no desenho mostram medidas iguais. E atenção: <b>todo triângulo equilátero é também isósceles</b>.</div>"], "perguntas": [{"tag": "conc", "q": "Por que se diz que <b>todo triângulo equilátero é também isósceles</b>?", "modelo": "Porque o isósceles é o que tem dois lados com a mesma medida. O equilátero tem os três lados iguais, então ele também tem dois lados com a mesma medida.", "chk": ["Lembrei que o isósceles tem dois lados iguais?", "Disse que o equilátero, com três lados iguais, também cumpre isso?"]}, {"tag": "apl", "q": "Classifique quanto aos lados os triângulos com medidas: (a) 6 cm, 6 cm e 6 cm; (b) 10 cm, 8 cm e 6 cm; (c) 4 cm, 9 cm e 9 cm.", "modelo": "(a) Equilátero (três lados iguais). (b) Escaleno (três lados diferentes). (c) Isósceles (dois lados iguais, de 9 cm).", "chk": ["(a) equilátero?", "(b) escaleno?", "(c) isósceles?"]}, {"tag": "apl", "q": "Explique para um colega mais novo por que as torres de energia e muitas pontes usam triângulos na estrutura.", "modelo": "Porque o triângulo não se deforma: as barras ficam firmes no lugar. Já um quadrilátero pode mudar de forma quando é empurrado, como o varal articulado.", "chk": ["Disse que o triângulo não se deforma (é rígido)?", "Comparei com o quadrilátero que muda de forma?"]}]}, {"porto": "Gema 6 · Desenho e construção · pp. 269 e 278-279", "emoji": "📏", "u": "m6", "titulo": "Triângulos: classificação quanto aos ângulos", "texto": ["<b>Quanto aos ângulos</b>, o triângulo pode ser:<ul><li><span class='destaque'>Acutângulo</span>: os três ângulos internos são agudos, ou seja, medem <b>menos de 90°</b>.</li><li><span class='destaque'>Retângulo</span>: um dos ângulos internos é reto, isto é, mede <b>90°</b>.</li><li><span class='destaque'>Obtusângulo</span>: um dos ângulos internos é obtuso, ou seja, mede <b>mais de 90° e menos de 180°</b>.</li></ul>", "<div class=\"fig\"><svg viewBox=\"0 0 490 195\" width=\"100%\" style=\"max-width:490px\" role=\"img\"><polygon points=\"20,140 150,140 90,50\" fill=\"#a78bfa\" fill-opacity=\"0.35\" stroke=\"#a78bfa\" stroke-width=\"2\"/><text x=\"85\" y=\"170\" fill=\"#a78bfa\" font-size=\"13\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">Acutângulo</text><text x=\"85\" y=\"186\" fill=\"#ece9f7\" font-size=\"11\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">3 ângulos agudos (< 90°)</text><polygon points=\"200,140 300,140 200,40\" fill=\"#34d399\" fill-opacity=\"0.35\" stroke=\"#34d399\" stroke-width=\"2\"/><rect x=\"200\" y=\"128\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"#ece9f7\"/><text x=\"250\" y=\"170\" fill=\"#34d399\" font-size=\"13\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">Retângulo</text><text x=\"250\" y=\"186\" fill=\"#ece9f7\" font-size=\"11\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">1 ângulo reto (90°)</text><polygon points=\"330,140 470,140 360,90\" fill=\"#fbbf24\" fill-opacity=\"0.35\" stroke=\"#fbbf24\" stroke-width=\"2\"/><text x=\"400\" y=\"170\" fill=\"#fbbf24\" font-size=\"13\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">Obtusângulo</text><text x=\"400\" y=\"186\" fill=\"#ece9f7\" font-size=\"11\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">1 ângulo obtuso (entre 90° e 180°)</text></svg></div>", "As duas classificações podem ser usadas <b>juntas</b>, como nos exercícios do livro: um triângulo de lados 12 cm, 9 cm e 15 cm com um ângulo reto é <b>escaleno retângulo</b>; um triângulo com ângulos de 40°, 70° e 70° (e dois lados iguais) é <b>isósceles acutângulo</b>; um triângulo com ângulos de 30°, 50° e 100° e lados todos diferentes é <b>escaleno obtusângulo</b>.", "<div class='olhar'><b>Olhar de lapidário:</b> olhe sempre para o <b>maior ângulo</b>. Se ele tem 90°, é retângulo; se passa de 90°, é obtusângulo; se é menor que 90°, todos são agudos e o triângulo é acutângulo.</div>"], "perguntas": [{"tag": "conc", "q": "Explique, com as suas palavras, o que diferencia um triângulo <b>acutângulo</b>, um <b>retângulo</b> e um <b>obtusângulo</b>.", "modelo": "No acutângulo, os três ângulos são menores que 90°. No retângulo, um ângulo mede exatamente 90°. No obtusângulo, um ângulo é maior que 90° (e menor que 180°).", "chk": ["Acutângulo = três ângulos menores que 90°?", "Retângulo = um ângulo de 90°?", "Obtusângulo = um ângulo maior que 90°?"]}, {"tag": "apl", "q": "Classifique quanto aos ângulos os triângulos com ângulos de: (a) 110°, 40° e 30°; (b) 90°, 45° e 45°; (c) 70°, 60° e 50°.", "modelo": "(a) Obtusângulo (tem 110°). (b) Retângulo (tem 90°). (c) Acutângulo (todos menores que 90°).", "chk": ["(a) obtusângulo?", "(b) retângulo?", "(c) acutângulo?"]}, {"tag": "apl", "q": "Um triângulo tem <b>dois lados de 5 cm</b> e o <b>ângulo entre eles mede 90°</b>. Dê a classificação completa dele (lados e ângulos) e explique.", "modelo": "É um triângulo isósceles retângulo: isósceles porque tem dois lados iguais (5 cm) e retângulo porque tem um ângulo de 90°.", "chk": ["Disse isósceles por ter dois lados iguais?", "Disse retângulo por ter um ângulo de 90°?"]}]}, {"porto": "Gema 7 · Desenho e construção · p. 270", "emoji": "🟪", "u": "m6", "titulo": "Quadriláteros e trapézios", "texto": ["Os <span class='destaque'>quadriláteros</span> são polígonos de <b>quatro lados</b>, com quatro vértices e quatro ângulos internos. Nos quadriláteros convexos sempre há <b>duas diagonais</b>. Com vértices A, B, C e D, o quadrilátero se chama <b>ABCD</b>.", "Para classificar, o livro olha os <b>lados paralelos</b> (que nunca se encontram, como os trilhos de um trem). Se há <b>pelo menos um par de lados paralelos</b>, o quadrilátero é <span class='destaque'>notável</span>. Se não há nenhum par, ele é um <span class='destaque'>quadrilátero qualquer</span>.", "Os <span class='destaque'>trapézios</span> são quadriláteros que têm <b>um par de lados opostos paralelos</b>. Esses lados paralelos são as <b>bases</b> (uma <b>base menor</b> e uma <b>base maior</b>); os lados não paralelos são os <b>lados transversais</b>.", "<ul><li><span class='destaque'>Trapézio escaleno</span>: os lados transversais <b>não são congruentes</b> (têm medidas diferentes).</li><li><span class='destaque'>Trapézio retângulo</span>: <b>dois ângulos internos são retos</b> (90°).</li><li><span class='destaque'>Trapézio isósceles</span>: os lados opostos <b>não paralelos são congruentes</b> (têm a mesma medida).</li></ul>", "<div class=\"fig\"><svg viewBox=\"0 0 510 162\" width=\"100%\" style=\"max-width:510px\" role=\"img\"><polygon points=\"60,30 120,30 170,120 20,120\" fill=\"#a78bfa\" fill-opacity=\"0.35\" stroke=\"#a78bfa\" stroke-width=\"2\"/><text x=\"95\" y=\"150\" fill=\"#a78bfa\" font-size=\"12\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">Trapézio escaleno</text><polygon points=\"210,30 270,30 320,120 210,120\" fill=\"#34d399\" fill-opacity=\"0.35\" stroke=\"#34d399\" stroke-width=\"2\"/><rect x=\"210\" y=\"30\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#ece9f7\"/><rect x=\"210\" y=\"110\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#ece9f7\"/><text x=\"265\" y=\"150\" fill=\"#34d399\" font-size=\"12\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">Trapézio retângulo</text><polygon points=\"390,30 450,30 490,120 350,120\" fill=\"#fbbf24\" fill-opacity=\"0.35\" stroke=\"#fbbf24\" stroke-width=\"2\"/><text x=\"420\" y=\"150\" fill=\"#fbbf24\" font-size=\"12\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">Trapézio isósceles</text><line x1=\"364\" y1=\"75\" x2=\"372\" y2=\"72\" stroke=\"#ece9f7\" stroke-width=\"2\"/><line x1=\"468\" y1=\"72\" x2=\"476\" y2=\"75\" stroke=\"#ece9f7\" stroke-width=\"2\"/></svg><div class=\"cap\">Nos três, as bases (lado de cima e lado de baixo) são paralelas.</div></div>", "<div class='olhar'><b>Olhar de lapidário:</b> no trapézio ABCD com AB // CD (lê-se 'AB paralelo a CD'), AB e CD são as bases e AD e BC são os lados transversais.</div>"], "perguntas": [{"tag": "conc", "q": "O que é preciso para um quadrilátero ser <b>notável</b>? E quando ele é chamado de <b>quadrilátero qualquer</b>?", "modelo": "Ele é notável quando tem pelo menos um par de lados paralelos. Quando não tem nenhum par de lados paralelos, é um quadrilátero qualquer.", "chk": ["Notável = pelo menos um par de lados paralelos?", "Qualquer = nenhum par de lados paralelos?"]}, {"tag": "apl", "q": "Um trapézio tem bases de <b>4 cm</b> e <b>10 cm</b>, e os outros dois lados medem <b>6 cm cada</b>. Que tipo de trapézio é esse? Quais lados são as bases e quais são os transversais?", "modelo": "É um trapézio isósceles, porque os lados não paralelos (transversais) têm a mesma medida, 6 cm. As bases são os lados de 4 cm (base menor) e 10 cm (base maior); os transversais são os dois lados de 6 cm.", "chk": ["Disse trapézio isósceles?", "Separei bases (4 e 10 cm) e transversais (6 cm)?"]}, {"tag": "apl", "q": "No trapézio <b>MNOP</b>, os lados MN e OP são paralelos e os ângulos <b>M̂ e P̂ medem 90°</b>. Qual é o tipo desse trapézio? Explique.", "modelo": "É um trapézio retângulo, porque tem dois ângulos internos retos (M̂ e P̂ de 90°).", "chk": ["Respondi trapézio retângulo?", "Justifiquei pelos dois ângulos de 90°?"]}]}, {"porto": "Gema 8 · Desenho e construção · p. 271", "emoji": "💠", "u": "m6", "titulo": "Paralelogramos: retângulo, losango e quadrado", "texto": ["Os <span class='destaque'>paralelogramos</span> são quadriláteros que têm <b>dois pares de lados opostos paralelos</b>. Com isso, os <b>lados opostos têm medidas iguais</b> e os <b>ângulos opostos são congruentes</b>.", "<ul><li><span class='destaque'>Retângulo</span>: paralelogramo com os <b>quatro ângulos internos retos</b> (90°).</li><li><span class='destaque'>Losango</span>: paralelogramo com os <b>quatro lados congruentes</b>.</li><li><span class='destaque'>Quadrado</span>: paralelogramo com os <b>quatro lados congruentes</b> e os <b>ângulos de 90°</b>. Por isso, o quadrado é, ao mesmo tempo, <b>retângulo e losango</b>.</li></ul>", "O livro organiza essa família num <b>diagrama de inclusão</b>: dentro dos quadriláteros estão os trapézios; dentro deles, os paralelogramos; e dentro dos paralelogramos, os retângulos e os losangos. O quadrado fica no encontro dos dois.", "<div class=\"fig\"><svg viewBox=\"0 0 460 215\" width=\"100%\" style=\"max-width:460px\" role=\"img\"><ellipse cx=\"230\" cy=\"110\" rx=\"220\" ry=\"100\" fill=\"#a78bfa\" fill-opacity=\".12\" stroke=\"#a78bfa\"/><ellipse cx=\"230\" cy=\"122\" rx=\"175\" ry=\"78\" fill=\"#60a5fa\" fill-opacity=\".14\" stroke=\"#60a5fa\"/><ellipse cx=\"230\" cy=\"135\" rx=\"135\" ry=\"55\" fill=\"#34d399\" fill-opacity=\".14\" stroke=\"#34d399\"/><ellipse cx=\"190\" cy=\"145\" rx=\"62\" ry=\"28\" fill=\"#fbbf24\" fill-opacity=\".18\" stroke=\"#fbbf24\"/><ellipse cx=\"270\" cy=\"145\" rx=\"62\" ry=\"28\" fill=\"#fb7185\" fill-opacity=\".18\" stroke=\"#fb7185\"/><text x=\"230\" y=\"26\" fill=\"#a78bfa\" font-size=\"13\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">Quadriláteros</text><text x=\"230\" y=\"58\" fill=\"#60a5fa\" font-size=\"13\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">Trapézios</text><text x=\"230\" y=\"96\" fill=\"#34d399\" font-size=\"13\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">Paralelogramos</text><text x=\"160\" y=\"150\" fill=\"#fbbf24\" font-size=\"11\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">Retângulos</text><text x=\"300\" y=\"150\" fill=\"#fb7185\" font-size=\"11\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">Losangos</text><text x=\"230\" y=\"150\" fill=\"#ece9f7\" font-size=\"11\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">Quadrado</text></svg><div class=\"cap\">Diagrama de inclusão do livro (p. 271): o quadrado fica no encontro dos retângulos com os losangos.</div></div>", "Lembra do varal articulado? As hastes têm todas o mesmo tamanho, então as formas dele são <b>losangos</b>. Num momento da abertura, os ângulos ficam com 90° — e, nesse instante, esses quadriláteros viram <b>retângulos e quadrados</b> ao mesmo tempo.", "<div class='olhar'><b>Olhar de lapidário:</b> retângulo = ângulos retos; losango = lados iguais; quadrado = as duas coisas.</div>"], "perguntas": [{"tag": "conc", "q": "Explique por que o <b>quadrado</b> é, ao mesmo tempo, um <b>retângulo</b> e um <b>losango</b>.", "modelo": "Porque ele tem os quatro ângulos retos, como o retângulo, e os quatro lados com a mesma medida, como o losango.", "chk": ["Liguei ângulos retos ao retângulo?", "Liguei lados iguais ao losango?"]}, {"tag": "apl", "q": "Um paralelogramo ABCD tem <b>AB = 8 cm</b> e <b>BC = 5 cm</b>, e o ângulo <b>Â mede 60°</b>. Quanto medem CD e DA? Qual ângulo também mede 60°?", "modelo": "Como os lados opostos são iguais, CD = 8 cm e DA = 5 cm. Como os ângulos opostos são congruentes, o ângulo Ĉ (oposto ao Â) também mede 60°.", "chk": ["CD = 8 cm e DA = 5 cm?", "Disse que o ângulo oposto (Ĉ) mede 60°?"]}, {"tag": "apl", "q": "Classifique cada paralelogramo: (a) quatro lados de 6 cm, mas com ângulos de 70° e 110°; (b) quatro ângulos retos, com lados de 3 cm e 7 cm; (c) quatro lados de 6 cm e quatro ângulos retos.", "modelo": "(a) Losango (lados iguais, ângulos não retos). (b) Retângulo (ângulos retos, lados diferentes). (c) Quadrado (lados iguais e ângulos retos).", "chk": ["(a) losango?", "(b) retângulo?", "(c) quadrado?"]}]}, {"porto": "Gema 9 · Análise de dados e situações · p. 312", "emoji": "💯", "u": "m7", "titulo": "O que é porcentagem", "texto": ["Na joalheria, tudo é medido em partes de um inteiro. Uma pesquisa citada no livro diz que <b>sete em cada dez</b> pessoas têm problemas relacionados ao sono. Como <b>7/10 = 70/100</b>, isso é o mesmo que <b>setenta em cada cem</b> pessoas.", "A toda <b>fração centesimal</b> (fração com denominador 100) podemos dar um valor <span class='destaque'>percentual</span>, um jeito simplificado de escrever. Dizer 70 em cada 100, ou 70/100, é o mesmo que dizer <b>70%</b>. Outros exemplos: 5/100 = 5%; 23/100 = 23%; 9,4/100 = 9,4%; 137/100 = 137%.", "Na <span class='destaque'>porcentagem</span>, o símbolo <b>%</b> substitui o denominador 100. Assim, 50% = 50/100 = 1/2: 50% de algo é a sua <b>metade</b>.", "Também existe a <span class='destaque'>permilagem</span>, para frações 'por mil' (denominador 1 000), com o símbolo <b>‰</b>. Por exemplo, 143‰ = 143/1 000, e 20‰ = 20/1 000 = 2/100 = 2%. Uma taxa de mortalidade infantil de 15‰ quer dizer 15 em cada mil crianças.", "<div class='olhar'><b>Olhar de lapidário:</b> % = 'de cada 100'. ‰ = 'de cada 1 000'.</div>"], "perguntas": [{"tag": "conc", "q": "O que o símbolo <b>%</b> significa? E o símbolo <b>‰</b>?", "modelo": "O % substitui o denominador 100: quer dizer 'de cada 100'. O ‰ é a permilagem: quer dizer 'de cada 1 000', denominador 1 000.", "chk": ["Disse que % é de cada 100 (denominador 100)?", "Disse que ‰ é de cada 1 000?"]}, {"tag": "apl", "q": "Numa escola, <b>3 em cada 10</b> estudantes vão de bicicleta. Escreva essa informação como fração centesimal e como porcentagem.", "modelo": "3/10 = 30/100 = 30%.", "chk": ["Transformei 3/10 em 30/100?", "Escrevi 30%?"]}, {"tag": "apl", "q": "Escreva em porcentagem: (a) 9/100; (b) 1/2; (c) 40‰.", "modelo": "(a) 9%. (b) 1/2 = 50/100 = 50%. (c) 40‰ = 40/1 000 = 4/100 = 4%.", "chk": ["(a) 9%?", "(b) 50%?", "(c) 4%?"]}]}, {"porto": "Gema 10 · Análise de dados e situações · pp. 313, 319 e 325", "emoji": "🧮", "u": "m7", "titulo": "Porcentagem de um valor", "texto": ["Para calcular a porcentagem de um valor, dá para usar a <b>fração de uma quantidade</b>. Exemplo do livro: 20% de 300 reais → 20/100 · 300 = 6 000/100 = <b>60 reais</b>. Outro: 70% de 210 milhões → 70/100 · 210 = 14 700/100 = <b>147 milhões</b>.", "Também dá para usar <span class='destaque'>cálculo mental</span>. Como 10% = 10/100 = 1/10, calcular <b>10% é dividir por 10</b> (ou andar com a vírgula uma casa para a esquerda). E <b>1% é dividir por 100</b>. A partir deles, montamos outras porcentagens: 70% = 7 · 10%, então 70% de 210 milhões = 7 · 21 milhões = 147 milhões.", "Exemplo do livro: 32% de R$ 12 000,00. Dividindo por 10: 10% = R$ 1 200,00; dividindo de novo: 1% = R$ 120,00. Como 32% = 3 · 10% + 2 · 1%, temos 3 · 1 200 + 2 · 120 = 3 600 + 240 = <b>R$ 3 840,00</b>.", "<table class='mini-t'><tr><th>Porcentagem</th><th>Fração usual</th><th>Como calcular</th></tr><tr><td>50%</td><td>1/2</td><td>a metade (dividir por 2)</td></tr><tr><td>25%</td><td>1/4</td><td>dividir por 4</td></tr><tr><td>10%</td><td>1/10</td><td>dividir por 10</td></tr><tr><td>1%</td><td>1/100</td><td>dividir por 100</td></tr></table>", "<div class='olhar'><b>Olhar de lapidário:</b> 5% é a metade de 10%. Para 15% de 600: 10% = 60 e 5% = 30, então 15% = 90.</div>"], "perguntas": [{"tag": "conc", "q": "Por que, para achar <b>10%</b> de um valor, basta dividir esse valor por 10?", "modelo": "Porque 10% = 10/100, que é igual a 1/10: é a décima parte do valor. Achar a décima parte é dividir por 10.", "chk": ["Escrevi que 10% = 10/100 = 1/10?", "Disse que é a décima parte, por isso divide por 10?"]}, {"tag": "apl", "q": "Calcule <b>30% de 250</b> usando o 10%. Mostre os passos.", "modelo": "10% de 250 = 250 : 10 = 25. Como 30% = 3 · 10%, temos 3 · 25 = 75.", "chk": ["Achei 10% = 25?", "Multipliquei por 3 e achei 75?"]}, {"tag": "apl", "q": "Calcule: (a) <b>25% de 80</b>; (b) <b>1% de 4 000 mL</b>; (c) <b>15% de 200</b>.", "modelo": "(a) 25% = 1/4, então 80 : 4 = 20. (b) 1% é dividir por 100: 4 000 : 100 = 40 mL. (c) 10% de 200 = 20 e 5% = 10, então 15% = 30.", "chk": ["(a) 20?", "(b) 40 mL?", "(c) 30?"]}]}, {"porto": "Gema 11 · Análise de dados e situações · pp. 314-315 e 325-326", "emoji": "🔍", "u": "m7", "titulo": "Descobrindo o total a partir de uma parte", "texto": ["Às vezes o problema dá uma <b>parte</b> e pergunta o <b>total</b> (o 100%). Exemplo do livro: numa loja, 35 camisetas são de manga curta e 30% são de manga comprida. Então a manga curta é 100% − 30% = <b>70%</b>. Se 70% → 35 camisetas, dividindo por 7: 10% → 5 camisetas; multiplicando por 10: <b>100% → 50 camisetas</b>.", "Outro exemplo: 40% dos atletas de uma escola vão receber nova graduação, e foram preparados 160 certificados. 40% = 4/10, então cada 1/10 (10%) vale 160 : 4 = 40 atletas, e o total é 10 · 40 = <b>400 atletas</b>.", "<b>Nem sempre a divisão por 10 ajuda</b>: é preciso pensar numa fração que combine com o que já se sabe. Numa excursão, 45% do dinheiro foi gasto com transporte (R$ 6 300,00). Dividindo por 9: 5% → R$ 700,00. Os outros gastos são 100 − 45 = 55% = 11 · 5%, ou seja, 11 · 700 = <b>R$ 7 700,00</b>.", "E nem sempre o que se quer é o 100%. Uma confeiteira separou 8% do açúcar (50 g) para decorar. Para a cobertura vão 24% = 3 · 8%, ou seja, 3 · 50 = <b>150 g</b>. Para a massa vão 50%: 8% → 50 g; dividindo por 8, 1% → 6,25 g; multiplicando por 50, <b>50% → 312,5 g</b>.", "<div class='olhar'><b>Olhar de lapidário:</b> ache o valor de um 'pedacinho' (10%, 5% ou 1%) e depois multiplique até chegar onde a pergunta quer.</div>"], "perguntas": [{"tag": "conc", "q": "Quando eu sei quanto vale uma porcentagem (por exemplo, 20% de algo) e quero descobrir o total, qual é a ideia que o livro usa?", "modelo": "Descobrir quanto vale um pedaço menor, como 10%, 5% ou 1%, dividindo; depois multiplicar esse pedaço até chegar a 100%.", "chk": ["Falei em achar o valor de um pedaço menor (10%, 5% ou 1%)?", "Falei em multiplicar até chegar a 100%?"]}, {"tag": "apl", "q": "Se <b>20% de um valor é 300</b>, qual é esse valor? Mostre como pensou.", "modelo": "20% → 300. Como 100% = 5 · 20%, o valor é 5 · 300 = 1 500. (Ou: 10% = 150, então 100% = 10 · 150 = 1 500.)", "chk": ["Cheguei a 1 500?", "Mostrei a passagem pelo 10% ou multipliquei 20% por 5?"]}, {"tag": "apl", "q": "Uma loja tem <b>60 bonés pretos</b>, e eles são <b>30%</b> de todos os bonés. Quantos bonés há ao todo? Quantos <b>não</b> são pretos?", "modelo": "30% → 60. Dividindo por 3: 10% → 20. Multiplicando por 10: 100% → 200 bonés. Não pretos: 200 − 60 = 140 (que são os 70%).", "chk": ["Achei 10% = 20?", "Achei o total de 200 bonés?", "Achei 140 não pretos?"]}]}, {"porto": "Gema 12 · Análise de dados e situações · pp. 316-318", "emoji": "🔢", "u": "m7", "titulo": "Porcentagem e números decimais", "texto": ["As frações centesimais também podem virar <b>números decimais</b> (ordem dos centésimos). Para passar de <b>porcentagem para decimal</b>, desloque a vírgula <b>duas casas para a esquerda</b>: 13% = 13/100 = 0,13; 89% = 0,89; 1% = 0,01; 14,5% = 0,145.", "O caminho contrário também é direto: para passar de <b>decimal para porcentagem</b>, desloque a vírgula <b>duas casas para a direita</b>: 0,22 = 22%; 0,008 = 0,8%; 1,5 = 150%; 20,05 = 2 005%. A porcentagem é só <b>outro jeito de escrever</b> uma fração ou um número decimal.", "O decimal ajuda nas contas. O corpo de um adulto tem cerca de 65% de água; numa pessoa de 75 kg: 0,65 · 75 = <b>48,75 kg</b> de água. E também serve para quantidades <b>maiores que o inteiro</b>: 132% de 480 = 1,32 · 480 = <b>633,6</b>.", "Para transformar uma <b>fração em porcentagem</b>, divida: numa pesquisa, 12 de 40 clientes votaram 'Muito bom'; 12 : 40 = 0,3 = 0,30 = <b>30%</b>. Quando a divisão não é exata, usamos <span class='destaque'>percentuais não exatos</span> (aproximados): 80 de 610 funcionários → 8/61 ≅ 0,1311 ≅ <b>13,11%</b>. Por causa das aproximações, a soma de todos os percentuais pode dar 99,99% em vez de 100%.", "<div class='olhar'><b>Olhar de lapidário:</b> 7% é 0,07 (e não 0,7!). Conte as duas casas: 7 → 0,07.</div>"], "perguntas": [{"tag": "conc", "q": "Explique como transformar uma <b>porcentagem em número decimal</b> e um <b>decimal em porcentagem</b>.", "modelo": "De porcentagem para decimal, eu divido por 100: a vírgula anda duas casas para a esquerda. De decimal para porcentagem, faço o contrário: a vírgula anda duas casas para a direita.", "chk": ["Porcentagem → decimal: vírgula duas casas para a esquerda?", "Decimal → porcentagem: vírgula duas casas para a direita?"]}, {"tag": "apl", "q": "Escreva como número decimal: (a) 7%; (b) 45,9%; (c) 215%. E como porcentagem: (d) 0,6; (e) 0,035.", "modelo": "(a) 0,07. (b) 0,459. (c) 2,15. (d) 0,6 = 0,60 = 60%. (e) 0,035 = 3,5%.", "chk": ["(a) 0,07 e (b) 0,459?", "(c) 2,15?", "(d) 60% e (e) 3,5%?"]}, {"tag": "apl", "q": "Numa pesquisa, <b>16 de 40</b> pessoas escolheram 'Bom'. Que porcentagem é essa? Mostre a divisão.", "modelo": "16/40 = 16 : 40 = 0,4 = 0,40 = 40%.", "chk": ["Fiz 16 : 40 = 0,4?", "Cheguei a 40%?"]}]}, {"porto": "Gema 13 · Análise de dados e situações · pp. 319-320, 322 e 327-329", "emoji": "🏷️", "u": "m7", "titulo": "Aplicando porcentagens: descontos, aumentos e partes", "texto": ["No comércio, é comum ver termos em inglês: <b>sale</b> indica promoção e <b>off</b> indica a porcentagem de desconto. Uma mercadoria de R$ 89,90 com 10% de desconto tem desconto de <b>R$ 8,99</b>. Com 20%, o desconto é o dobro (2 · 8,99), ou o preço dividido por 5, porque 20% = 1/5.", "Com <b>desconto de 20%</b>, a mercadoria passa a custar <b>80% do preço</b> (100% − 20%). Na calculadora: 89,9 × 80% = <b>71,92</b>. O símbolo % na calculadora representa a divisão por 100: 30% de 820 → 0,3 · 820 = 246.", "Nos <b>descontos</b>, tiramos a porcentagem do valor: uma mercadoria de 7 500 reais com 30% de desconto → 30% de 7 500 = 2 250 → 7 500 − 2 250 = <b>5 250 reais</b>. Nos <b>aumentos</b> (acréscimos), somamos: eram esperadas 3 800 pessoas e foram 40% a mais → 40% de 3 800 = 1 520 → 3 800 + 1 520 = <b>5 320 pessoas</b>.", "Porcentagens também dividem um inteiro em <b>partes</b>. Um produto de limpeza diluído na razão de 1 para 3 forma 4 partes: <b>1/4 = 25%</b> de produto e <b>3/4 = 75%</b> de água. Um refresco com 1 parte de concentrado e 4 de água tem 5 partes: <b>1/5 = 20%</b> de concentrado e <b>4/5 = 80%</b> de água.", "<div class='olhar'><b>Olhar de lapidário:</b> desconto → você paga 100% MENOS o desconto. Aumento → o valor fica 100% MAIS o aumento.</div>"], "perguntas": [{"tag": "conc", "q": "Se uma mercadoria tem <b>25% de desconto</b>, quantos por cento do preço eu vou pagar? Explique.", "modelo": "Vou pagar 75% do preço, porque o preço inteiro é 100% e o desconto tira 25%: 100% − 25% = 75%.", "chk": ["Respondi 75%?", "Expliquei com 100% − 25%?"]}, {"tag": "apl", "q": "Um tênis custa <b>R$ 240,00</b> e está com <b>15% de desconto</b>. Quanto é o desconto e quanto se paga?", "modelo": "10% de 240 = 24 e 5% = 12, então 15% = 36. Desconto de R$ 36,00; paga-se 240 − 36 = R$ 204,00.", "chk": ["Achei o desconto de R$ 36,00?", "Achei o preço final de R$ 204,00?"]}, {"tag": "apl", "q": "Um suco é preparado com <b>1 copo de concentrado para 9 copos de água</b>. Que porcentagem do suco pronto é concentrado? E água?", "modelo": "São 1 + 9 = 10 partes. Concentrado: 1/10 = 10%. Água: 9/10 = 90%.", "chk": ["Contei 10 partes ao todo?", "Concentrado 10% e água 90%?"]}]}, {"porto": "Gema 14 · Exploração das dimensões · pp. 340-341", "emoji": "🎲", "u": "m8", "titulo": "Poliedros e corpos redondos", "texto": ["Agora as gemas saem do papel e ganham volume. Quando todas as superfícies de uma forma são <b>polígonos que não estão no mesmo plano</b>, ela é um <span class='destaque'>poliedro</span> (como a pirâmide e o prisma). Quando a forma tem <b>pelo menos uma superfície não plana</b> (curva), ela é um <span class='destaque'>corpo redondo</span> e <b>não é poliedro</b> (como o cone, a esfera e o cilindro).", "<div class=\"fig\"><svg viewBox=\"0 0 490 175\" width=\"100%\" style=\"max-width:490px\" role=\"img\"><polygon points=\"30,120 110,120 130,100 50,100\" fill=\"#a78bfa\" fill-opacity=\"0.2\" stroke=\"#a78bfa\" stroke-width=\"2\"/><polygon points=\"30,120 110,120 80,30\" fill=\"#a78bfa\" fill-opacity=\"0.35\" stroke=\"#a78bfa\" stroke-width=\"2\"/><polygon points=\"110,120 130,100 80,30\" fill=\"#a78bfa\" fill-opacity=\"0.5\" stroke=\"#a78bfa\" stroke-width=\"2\"/><text x=\"80\" y=\"150\" fill=\"#a78bfa\" font-size=\"12\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">Pirâmide</text><text x=\"80\" y=\"165\" fill=\"#ece9f7\" font-size=\"11\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">(poliedro)</text><polygon points=\"170,50 240,50 240,120 170,120\" fill=\"#60a5fa\" fill-opacity=\"0.3\" stroke=\"#60a5fa\" stroke-width=\"2\"/><polygon points=\"240,50 265,32 265,102 240,120\" fill=\"#60a5fa\" fill-opacity=\"0.5\" stroke=\"#60a5fa\" stroke-width=\"2\"/><polygon points=\"170,50 195,32 265,32 240,50\" fill=\"#60a5fa\" fill-opacity=\"0.45\" stroke=\"#60a5fa\" stroke-width=\"2\"/><text x=\"215\" y=\"150\" fill=\"#60a5fa\" font-size=\"12\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">Prisma</text><text x=\"215\" y=\"165\" fill=\"#ece9f7\" font-size=\"11\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">(poliedro)</text><ellipse cx=\"340\" cy=\"118\" rx=\"38\" ry=\"10\" fill=\"#fbbf24\" fill-opacity=\".3\" stroke=\"#fbbf24\"/><polygon points=\"302,118 378,118 340,35\" fill=\"#fbbf24\" fill-opacity=\"0.3\" stroke=\"#fbbf24\" stroke-width=\"2\"/><text x=\"340\" y=\"150\" fill=\"#fbbf24\" font-size=\"12\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">Cone</text><text x=\"340\" y=\"165\" fill=\"#ece9f7\" font-size=\"11\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">(corpo redondo)</text><circle cx=\"440\" cy=\"85\" r=\"38\" fill=\"#fb7185\" fill-opacity=\".3\" stroke=\"#fb7185\" stroke-width=\"2\"/><ellipse cx=\"440\" cy=\"85\" rx=\"38\" ry=\"10\" fill=\"none\" stroke=\"#fb7185\" stroke-dasharray=\"4,3\"/><text x=\"440\" y=\"150\" fill=\"#fb7185\" font-size=\"12\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">Esfera</text><text x=\"440\" y=\"165\" fill=\"#ece9f7\" font-size=\"11\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">(corpo redondo)</text></svg><div class=\"cap\">Poliedros: todas as faces são polígonos. Corpos redondos: têm pelo menos uma superfície não plana.</div></div>", "Elementos de um poliedro: <ul><li><span class='destaque'>Face</span>: cada região plana poligonal que compõe o poliedro.</li><li><span class='destaque'>Aresta</span>: cada segmento de reta comum a duas faces.</li><li><span class='destaque'>Vértice</span>: cada ponto onde se encontram três ou mais arestas.</li></ul>No livro, uma pirâmide de base retangular tem <b>5 faces</b> (4 triangulares e 1 retangular), <b>8 arestas</b> e <b>5 vértices</b>; e um prisma de base hexagonal tem <b>8 faces</b> (2 hexagonais e 6 retangulares), <b>12 vértices</b> e <b>18 arestas</b>.", "Assim como os polígonos, os poliedros podem ser <b>convexos</b> (para quaisquer dois pontos A e B do interior, o segmento AB fica todo dentro) ou <b>não convexos</b> (existe um AB que não fica todo dentro).", "O poliedro pode ser nomeado pela <b>quantidade de faces</b>: 4 faces = <span class='destaque'>tetraedro</span>; 5 faces = <span class='destaque'>pentaedro</span>; 6 faces = <span class='destaque'>hexaedro</span>; e assim por diante.", "<div class='olhar'><b>Olhar de lapidário:</b> encostou e rolou? É corpo redondo. Só tem 'faces chatas' de polígono? É poliedro.</div>"], "perguntas": [{"tag": "conc", "q": "Por que um <b>cilindro</b> não é poliedro, mas uma <b>caixa de sapato</b> é?", "modelo": "O cilindro tem uma superfície curva (não plana), então é corpo redondo. A caixa de sapato só tem faces planas que são polígonos (retângulos), então é poliedro.", "chk": ["Disse que o cilindro tem superfície curva/não plana?", "Disse que a caixa só tem faces que são polígonos?"]}, {"tag": "apl", "q": "Classifique como <b>poliedro</b> ou <b>corpo redondo</b>: (a) uma bola de futebol; (b) uma casquinha de sorvete; (c) um dado; (d) uma pirâmide de papel.", "modelo": "(a) Corpo redondo (forma de esfera). (b) Corpo redondo (forma de cone). (c) Poliedro (todas as faces são quadrados). (d) Poliedro (faces são polígonos).", "chk": ["Bola e casquinha = corpos redondos?", "Dado e pirâmide = poliedros?"]}, {"tag": "apl", "q": "Um poliedro tem <b>6 faces</b>. Como ele se chama pela quantidade de faces? E um poliedro com <b>4 faces</b>?", "modelo": "Com 6 faces é um hexaedro. Com 4 faces é um tetraedro.", "chk": ["6 faces = hexaedro?", "4 faces = tetraedro?"]}]}, {"porto": "Gema 15 · Exploração das dimensões · pp. 342-343", "emoji": "🏛️", "u": "m8", "titulo": "Prismas e pirâmides", "texto": ["Dois poliedros especiais: os prismas e as pirâmides. O <span class='destaque'>prisma</span> tem <b>duas faces idênticas e paralelas</b>, chamadas <b>bases</b>; as outras são as <b>faces laterais</b>, que são sempre <b>paralelogramos</b>. Se as faces laterais são retângulos, ele é um <b>prisma reto</b>; os demais são <b>prismas oblíquos</b>. O nome do prisma vem do polígono da base (prisma de base triangular, pentagonal…).", "A <span class='destaque'>pirâmide</span> tem <b>uma só base</b>; as faces laterais são sempre <b>triângulos</b>, e ela tem <b>um único vértice fora da base</b>. O nome também vem do polígono da base (pirâmide de base retangular, hexagonal…).", "Contando pelo número de vértices do <b>polígono da base</b> (vamos chamar de <b>n</b>):<table class='mini-t'><tr><th></th><th>Vértices</th><th>Arestas</th><th>Faces</th></tr><tr><td><b>Prisma</b></td><td>o dobro: 2 · n</td><td>o triplo: 3 · n</td><td>duas a mais: n + 2</td></tr><tr><td><b>Pirâmide</b></td><td>um a mais: n + 1</td><td>o dobro: 2 · n</td><td>igual aos vértices: n + 1</td></tr></table>Exemplos do livro: prisma de base octogonal (8 lados) → 16 vértices, 24 arestas e 10 faces. Pirâmide de base heptagonal (7 lados) → 8 vértices, 14 arestas e 8 faces.", "A <span class='destaque'>planificação</span> é a representação de toda a superfície de uma forma espacial em <b>um único plano</b> (como a caixa desmontada). A planificação de um prisma reto de base hexagonal, por exemplo, tem 2 hexágonos e 6 retângulos.", "<div class='olhar'><b>Olhar de lapidário:</b> prisma = duas bases; pirâmide = uma base e uma ponta. Faces laterais: paralelogramos no prisma, triângulos na pirâmide.</div>"], "perguntas": [{"tag": "conc", "q": "Cite <b>duas diferenças</b> entre um prisma e uma pirâmide.", "modelo": "O prisma tem duas bases idênticas e paralelas, e a pirâmide tem uma base só. As faces laterais do prisma são paralelogramos; as da pirâmide são triângulos. (A pirâmide também tem um vértice fora da base.)", "chk": ["Falei do número de bases (duas × uma)?", "Falei do formato das faces laterais (paralelogramos × triângulos)?"]}, {"tag": "apl", "q": "Calcule o número de <b>vértices, arestas e faces</b> de um <b>prisma de base pentagonal</b>.", "modelo": "A base tem 5 vértices. Vértices: 2 · 5 = 10. Arestas: 3 · 5 = 15. Faces: 5 + 2 = 7.", "chk": ["10 vértices?", "15 arestas?", "7 faces?"]}, {"tag": "apl", "q": "Agora calcule vértices, arestas e faces de uma <b>pirâmide de base hexagonal</b>.", "modelo": "A base tem 6 vértices. Vértices: 6 + 1 = 7. Arestas: 2 · 6 = 12. Faces: 6 + 1 = 7.", "chk": ["7 vértices?", "12 arestas?", "7 faces?"]}]}, {"porto": "Gema 16 · Exploração das dimensões · pp. 360-361 e 371", "emoji": "🗺️", "u": "m8", "titulo": "Plano cartesiano", "texto": ["Na bandeja do lapidário, cada pedra tem um endereço. O livro conta a história de uma empresa de saneamento: um técnico desenhou <b>duas retas numéricas perpendiculares</b> e marcou os bueiros com vazamento. O bueiro A ficou em 1 no eixo horizontal e 1 no eixo vertical: o par <b>(1; 1)</b>. O bueiro B ficou no par <b>(2; 0)</b>, e o bueiro H, no par <b>(0; 2)</b>.", "A <b>ordem dos números importa</b>: (2; 0) e (0; 2) são lugares diferentes. Por isso esses pares se chamam <span class='destaque'>pares ordenados</span>.", "As duas retas perpendiculares são os <span class='destaque'>eixos cartesianos</span>: o eixo horizontal é o <b>eixo x</b> (<b>eixo das abscissas</b>) e o vertical é o <b>eixo y</b> (<b>eixo das ordenadas</b>). O ponto onde eles se cruzam é a <span class='destaque'>origem</span>, de par ordenado <b>(0; 0)</b>.", "Os dois números do par são as <span class='destaque'>coordenadas cartesianas</span>: o <b>primeiro</b> é a <b>abscissa</b> (quanto anda para a direita) e o <b>segundo</b> é a <b>ordenada</b> (quanto sobe). O ponto P(4; 4) tem abscissa 4 e ordenada 4; o ponto Q(5; 2) tem abscissa 5 e ordenada 2. Esse referencial é o <b>plano cartesiano</b> (ou sistema de coordenadas cartesianas), em homenagem ao filósofo e matemático francês René Descartes (1596-1650).", "<div class=\"fig\"><svg viewBox=\"0 0 268 224\" width=\"100%\" style=\"max-width:268px\" role=\"img\"><line x1=\"34\" y1=\"20\" x2=\"34\" y2=\"190\" stroke=\"#453d66\" stroke-width=\"1\"/><text x=\"34\" y=\"208\" fill=\"#ece9f7\" font-size=\"12\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">0</text><line x1=\"68\" y1=\"20\" x2=\"68\" y2=\"190\" stroke=\"#453d66\" stroke-width=\"1\"/><text x=\"68\" y=\"208\" fill=\"#ece9f7\" font-size=\"12\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">1</text><line x1=\"102\" y1=\"20\" x2=\"102\" y2=\"190\" stroke=\"#453d66\" stroke-width=\"1\"/><text x=\"102\" y=\"208\" fill=\"#ece9f7\" font-size=\"12\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">2</text><line x1=\"136\" y1=\"20\" x2=\"136\" y2=\"190\" stroke=\"#453d66\" stroke-width=\"1\"/><text x=\"136\" y=\"208\" fill=\"#ece9f7\" font-size=\"12\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">3</text><line x1=\"170\" y1=\"20\" x2=\"170\" y2=\"190\" stroke=\"#453d66\" stroke-width=\"1\"/><text x=\"170\" y=\"208\" fill=\"#ece9f7\" font-size=\"12\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">4</text><line x1=\"204\" y1=\"20\" x2=\"204\" y2=\"190\" stroke=\"#453d66\" stroke-width=\"1\"/><text x=\"204\" y=\"208\" fill=\"#ece9f7\" font-size=\"12\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">5</text><line x1=\"238\" y1=\"20\" x2=\"238\" y2=\"190\" stroke=\"#453d66\" stroke-width=\"1\"/><text x=\"238\" y=\"208\" fill=\"#ece9f7\" font-size=\"12\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">6</text><line x1=\"34\" y1=\"190\" x2=\"238\" y2=\"190\" stroke=\"#453d66\" stroke-width=\"1\"/><line x1=\"34\" y1=\"156\" x2=\"238\" y2=\"156\" stroke=\"#453d66\" stroke-width=\"1\"/><text x=\"22\" y=\"160\" fill=\"#ece9f7\" font-size=\"12\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">1</text><line x1=\"34\" y1=\"122\" x2=\"238\" y2=\"122\" stroke=\"#453d66\" stroke-width=\"1\"/><text x=\"22\" y=\"126\" fill=\"#ece9f7\" font-size=\"12\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">2</text><line x1=\"34\" y1=\"88\" x2=\"238\" y2=\"88\" stroke=\"#453d66\" stroke-width=\"1\"/><text x=\"22\" y=\"92\" fill=\"#ece9f7\" font-size=\"12\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">3</text><line x1=\"34\" y1=\"54\" x2=\"238\" y2=\"54\" stroke=\"#453d66\" stroke-width=\"1\"/><text x=\"22\" y=\"58\" fill=\"#ece9f7\" font-size=\"12\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">4</text><line x1=\"34\" y1=\"20\" x2=\"238\" y2=\"20\" stroke=\"#453d66\" stroke-width=\"1\"/><text x=\"22\" y=\"24\" fill=\"#ece9f7\" font-size=\"12\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\">5</text><line x1=\"34\" y1=\"190\" x2=\"256\" y2=\"190\" stroke=\"#ece9f7\" stroke-width=\"2\"/><line x1=\"34\" y1=\"190\" x2=\"34\" y2=\"8\" stroke=\"#ece9f7\" stroke-width=\"2\"/><text x=\"262\" y=\"194\" fill=\"#fbbf24\" font-size=\"14\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">x</text><text x=\"34\" y=\"6\" fill=\"#fbbf24\" font-size=\"14\" text-anchor=\"middle\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">y</text><circle cx=\"170\" cy=\"54\" r=\"5\" fill=\"#a78bfa\"/><text x=\"180\" y=\"46\" fill=\"#a78bfa\" font-size=\"13\" text-anchor=\"start\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">P</text><circle cx=\"204\" cy=\"122\" r=\"5\" fill=\"#fbbf24\"/><text x=\"214\" y=\"114\" fill=\"#fbbf24\" font-size=\"13\" text-anchor=\"start\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">Q</text><circle cx=\"34\" cy=\"190\" r=\"5\" fill=\"#34d399\"/><text x=\"44\" y=\"182\" fill=\"#34d399\" font-size=\"13\" text-anchor=\"start\" font-family=\"Segoe UI,Arial\" font-weight=\"bold\">O</text></svg><div class=\"cap\">P(4; 4), Q(5; 2) e a origem O(0; 0).</div></div>", "Com coordenadas também localizamos os <b>vértices de polígonos</b>. No livro, o retângulo HIJK tem H(5; 4), I(5; 6), J(9; 6) e K(9; 4). H e I têm a mesma abscissa (5); I e J têm a mesma ordenada (6). Regra: <b>pontos com abscissas iguais ficam na mesma linha vertical</b> e <b>pontos com ordenadas iguais ficam na mesma linha horizontal</b>.", "<div class='olhar'><b>Olhar de lapidário:</b> primeiro anda no x (para a direita), depois sobe no y. 'Primeiro o chão, depois o elevador.'</div>"], "perguntas": [{"tag": "conc", "q": "No par ordenado <b>(3; 5)</b>, qual número é a abscissa e qual é a ordenada? Como você chega a esse ponto saindo da origem?", "modelo": "A abscissa é 3 e a ordenada é 5. Saindo da origem, ando 3 unidades para a direita no eixo x e depois subo 5 unidades no eixo y.", "chk": ["Abscissa 3 e ordenada 5?", "Disse andar 3 para a direita e subir 5?"]}, {"tag": "apl", "q": "Os pontos <b>(4; 0)</b> e <b>(0; 4)</b> são o mesmo ponto? Explique onde cada um fica.", "modelo": "Não. A ordem importa. O (4; 0) fica 4 unidades para a direita, em cima do eixo x. O (0; 4) fica 4 unidades para cima, em cima do eixo y.", "chk": ["Disse que não são o mesmo ponto (a ordem importa)?", "Localizei (4; 0) no eixo x e (0; 4) no eixo y?"]}, {"tag": "apl", "q": "Um quadrado tem vértices <b>A(1; 1)</b>, <b>B(4; 1)</b> e <b>C(4; 4)</b>. Quais são as coordenadas do quarto vértice D? Quais vértices ficam na mesma linha horizontal que A?", "modelo": "D(1; 4). Na mesma linha horizontal que A fica o B, porque os dois têm ordenada 1.", "chk": ["Achei D(1; 4)?", "Disse que B está na mesma horizontal que A (ordenada 1)?"]}]}];
+
+var CHAVE=KIT+'_leitura_v1';
+var mem={};
+var estado=carregar();
+function carregar(){
+  try{ var s=localStorage.getItem(CHAVE); if(s) return JSON.parse(s); }catch(e){ if(mem[CHAVE]) return JSON.parse(mem[CHAVE]); }
+  return {blocos:{}};
+}
+function calcProgresso(){
+  var conf=0, chkPend=0;
+  BLOCOS.forEach(function(bloco,i){
+    var b=estado.blocos[i]; if(!b||!b.conferido) return; conf++;
+    bloco.perguntas.forEach(function(p,j){ var ep=(b.perguntas&&b.perguntas[j])||{chk:{}}; p.chk.forEach(function(pt,k){ if(!ep.chk||!ep.chk[k]) chkPend++; }); });
+  });
+  estado.progresso={conferidos:conf,total:BLOCOS.length,chkPendentes:chkPend};
+  if(conf===BLOCOS.length && chkPend===0){ if(!estado.concluido){ estado.concluido=true; estado.concluidoEm=new Date().toISOString(); } }
+  return estado.progresso;
+}
+function salvar(){
+  calcProgresso();
+  var s=JSON.stringify(estado);
+  try{ localStorage.setItem(CHAVE,s); }catch(e){ mem[CHAVE]=s; }
+  var d=new Date();
+  document.getElementById('salvo').textContent='💾 Salvo às '+d.toLocaleTimeString('pt-BR')+' de '+d.toLocaleDateString('pt-BR');
+  atualizarTrilhaFim(); desenharMapa();
+}
+function desenharMapa(){
+  var p=estado.progresso||calcProgresso(); var h='';
+  BLOCOS.forEach(function(b,i){ var e=estado.blocos[i]; var cls=(e&&e.conferido)?'feita':((e&&e.aberto)?'atual':''); h+='<a class="'+cls+'" href="#bloco'+i+'" onclick="irBloco('+i+');return false;" title="'+b.titulo.replace(/"/g,'')+'">'+((e&&e.conferido)?'💎':(i+1))+'</a>'; });
+  h+='<div class="leg">💎 '+p.conferidos+' de '+p.total+' gemas lapidadas</div>';
+  document.getElementById('mapa').innerHTML=h;
+  document.getElementById('barra').style.width=(p.conferidos/p.total*100)+'%';
+}
+function atualizarTrilhaFim(){
+  var p=estado.progresso||calcProgresso();
+  var box=document.getElementById('trilha-fim'), txt=document.getElementById('trilha-fim-txt'), btn=document.getElementById('btn-prox');
+  var h3=box.querySelector('h3');
+  document.getElementById('coroa').classList.toggle('show', !!estado.concluido);
+  if(estado.concluido||trilhaLiberada()){
+    h3.textContent='✅ Leitura concluída — Quiz destravado!';
+    txt.textContent=estado.concluido?'Você conferiu as 16 gemas e respondeu a autoavaliação. Agora teste o que aprendeu.':'Trilha liberada pelos pais.';
+    btn.classList.remove('off');
+  } else {
+    h3.textContent='🔒 Próxima etapa: Quiz';
+    var faltam=p.total-p.conferidos;
+    txt.textContent=faltam>0 ? 'Destrava quando você conferir as '+p.total+' gemas (faltam '+faltam+').' : 'Falta responder a autoavaliação Sim/Não de '+p.chkPendentes+' ponto(s) para destravar.';
+    btn.classList.add('off');
+  }
+  marcarNav();
+}
+function estBloco(i){ if(!estado.blocos[i]) estado.blocos[i]={aberto:i===0,conferido:false,perguntas:{}}; return estado.blocos[i]; }
+function estPerg(i,j){ var b=estBloco(i); if(!b.perguntas[j]) b.perguntas[j]={resp:'',warned:false,red:false,tentou:'',chk:{}}; return b.perguntas[j]; }
+
+/* ====== ANTICÓPIA (motor validado — Português 7º, 08/10/2026; mesmo motor do kit Balão-Sonda) ====== */
+function normPal(s){
+  return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/<[^>]*>/g,' ').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim().split(' ').filter(Boolean);
+}
+function maiorRun(aw,bw){
+  var bStr=' '+bw.join(' ')+' ', best=0;
+  for(var i=0;i<aw.length;i++){
+    for(var len=aw.length-i; len>0; len--){
+      var sub=aw.slice(i,i+len).join(' ');
+      if(bStr.indexOf(' '+sub+' ')>=0){ if(len>best)best=len; break; }
+    }
+  }
+  return best;
+}
+function cobertoPorRuns(aw,bw,minRun){
+  var bStr=' '+bw.join(' ')+' ', cov=new Array(aw.length).fill(false);
+  for(var i=0;i<aw.length;i++){
+    for(var len=aw.length-i; len>=minRun; len--){
+      var sub=aw.slice(i,i+len).join(' ');
+      if(bStr.indexOf(' '+sub+' ')>=0){ for(var k=i;k<i+len;k++)cov[k]=true; break; }
+    }
+  }
+  return cov.filter(Boolean).length;
+}
+function ehCopia(resp, textoBloco, pergunta){
+  var a=normPal(resp), src=normPal(textoBloco), q=normPal(pergunta);
+  if(a.length<5) return false;
+  var qStr=' '+q.join(' ')+' ', keep=new Array(a.length).fill(true);
+  for(var i=0;i<a.length;i++){
+    for(var len=a.length-i; len>=4; len--){
+      var sub=a.slice(i,i+len).join(' ');
+      if(qStr.indexOf(' '+sub+' ')>=0){ for(var k=i;k<i+len;k++)keep[k]=false; break; }
+    }
+  }
+  var af=a.filter(function(w,idx){return keep[idx];});
+  if(af.length<5) return false;
+  var run=maiorRun(af,src);
+  var cov=cobertoPorRuns(af,src,5);
+  var ratio=cov/af.length;
+  return run>=8 || ratio>0.6;
+}
+
+function textoPlano(bloco){ return bloco.texto.join(' ').replace(/<svg[\s\S]*?<\/svg>/g,' '); }
+function irBloco(i){ var el=document.getElementById('bloco'+i); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }
+
+function render(){
+  var cont=document.getElementById('blocos'); cont.innerHTML='';
+  BLOCOS.forEach(function(bloco,i){
+    var b=estBloco(i);
+    var div=document.createElement('div'); div.className='bloco '+bloco.u+(b.aberto?'':' travado'); div.id='bloco'+i;
+    var html='<div class="bloco-cab"><div class="num"><span>'+(i+1)+'</span></div><div><div class="porto">'+bloco.porto+'</div><h3>'+bloco.emoji+' '+bloco.titulo+'</h3></div></div>';
+    if(!b.aberto){
+      html+='<div class="cadeado">🔒 Esta gema abre quando você conferir a gema anterior.</div>';
+      div.innerHTML=html; cont.appendChild(div); return;
+    }
+    html+='<div class="bloco-corpo"><div class="texto">';
+    bloco.texto.forEach(function(p){ html+= (/^<(div|ul|table)/.test(p) ? p : '<p>'+p+'</p>'); });
+    html+='</div>';
+    bloco.perguntas.forEach(function(p,j){
+      var ep=estPerg(i,j);
+      var tagTxt=p.tag==='conc'?'Conceito':'Aplicação';
+      html+='<div class="perg'+(ep.red?' red':'')+'" id="perg'+i+'_'+j+'">';
+      html+='<span class="tag '+p.tag+'">'+tagTxt+'</span>';
+      html+='<label for="ta'+i+'_'+j+'">'+(j+1)+'. '+p.q+'</label>';
+      html+='<textarea id="ta'+i+'_'+j+'" oninput="digitou('+i+','+j+')"></textarea>';
+      html+='<div class="aviso" id="av'+i+'_'+j+'"></div>';
+      html+='<div class="modelo" id="mod'+i+'_'+j+'"><span class="lab">Resposta-modelo</span><p>'+p.modelo+'</p>';
+      html+='<div class="chk" id="chk'+i+'_'+j+'"></div></div>';
+      html+='</div>';
+    });
+    html+='<button class="conferir" id="conf'+i+'" onclick="conferir('+i+')">✔️ Conferir esta gema</button>';
+    html+='<div class="status-bloco" id="st'+i+'"></div>';
+    if(i<BLOCOS.length-1){ html+='<div class="prox" id="px'+i+'"></div>'; }
+    html+='</div>';
+    div.innerHTML=html;
+    cont.appendChild(div);
+    bloco.perguntas.forEach(function(p,j){ document.getElementById('ta'+i+'_'+j).value=estPerg(i,j).resp||''; });
+  });
+  BLOCOS.forEach(function(bloco,i){
+    var b=estBloco(i);
+    if(b.aberto && b.conferido){ mostrarConferido(i); }
+    atualizarBotao(i);
+  });
+  atualizarRelatorio();
+  atualizarTrilhaFim();
+  desenharMapa();
+}
+
+function digitou(i,j){
+  var ep=estPerg(i,j);
+  ep.resp=document.getElementById('ta'+i+'_'+j).value;
+  if(ep.red){
+    var bloco=BLOCOS[i];
+    if(!ehCopia(ep.resp, textoPlano(bloco), bloco.perguntas[j].q)){
+      ep.red=false;
+      var pd=document.getElementById('perg'+i+'_'+j); if(pd) pd.classList.remove('red');
+      var av=document.getElementById('av'+i+'_'+j); if(av){av.className='aviso'; av.textContent='';}
+      if(estBloco(i).conferido) atualizarStatusBloco(i);
+    }
+  }
+  atualizarBotao(i);
+  salvar();
+  atualizarRelatorio();
+}
+
+function atualizarBotao(i){
+  var b=estBloco(i); if(!b.aberto||b.conferido) return;
+  var btn=document.getElementById('conf'+i); if(!btn) return;
+  var todas=true;
+  BLOCOS[i].perguntas.forEach(function(p,j){
+    var el=document.getElementById('ta'+i+'_'+j); var v=el?el.value:(estPerg(i,j).resp||'');
+    if(v.trim().length<3) todas=false;
+  });
+  btn.disabled=!todas;
+}
+
+function conferir(i){
+  var bloco=BLOCOS[i], b=estBloco(i);
+  var algumBloqueado=false;
+  bloco.perguntas.forEach(function(p,j){
+    var ep=estPerg(i,j);
+    ep.resp=document.getElementById('ta'+i+'_'+j).value;
+    var av=document.getElementById('av'+i+'_'+j);
+    var copia=ehCopia(ep.resp, textoPlano(bloco), p.q);
+    if(copia){
+      if(!ep.warned || ep.resp===ep.tentou && !ep.liberada){
+        if(!ep.warned){ ep.warned=true; ep.tentou=ep.resp; }
+        av.className='aviso amarelo';
+        av.innerHTML='✋ Boa parte da sua resposta está igual ao texto. Tente <b>reescrever com as suas palavras</b> — explique como se fosse para um amigo, sem olhar o texto. Pode ficar mais curto e simples: o que vale é ser <b>SEU</b>.';
+        algumBloqueado=true;
+      } else {
+        ep.red=true; ep.liberada=true;
+        av.className='aviso vermelho';
+        av.innerHTML='🔴 Esta resposta continua muito parecida com o texto. Ela foi aceita, mas ficou marcada para revisar. Se reescrever com as suas palavras, a marca some.';
+        document.getElementById('perg'+i+'_'+j).classList.add('red');
+      }
+    } else {
+      ep.red=false;
+      if(av){ av.className='aviso'; av.textContent=''; }
+      var pd=document.getElementById('perg'+i+'_'+j); if(pd) pd.classList.remove('red');
+    }
+  });
+  salvar();
+  if(algumBloqueado){
+    document.getElementById('st'+i).innerHTML='<span style="color:var(--ambar)">✍️ Reescreva as respostas marcadas em amarelo (mude o texto) e clique em Conferir de novo.</span>';
+    return;
+  }
+  b.conferido=true;
+  if(i<BLOCOS.length-1){ estBloco(i+1).aberto=true; }
+  salvar();
+  render();
+  var alvo=document.getElementById('bloco'+i);
+  if(alvo) alvo.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function mostrarConferido(i){
+  var bloco=BLOCOS[i];
+  bloco.perguntas.forEach(function(p,j){
+    var ep=estPerg(i,j);
+    var mod=document.getElementById('mod'+i+'_'+j); if(mod) mod.classList.add('show');
+    if(ep.red){ var pd=document.getElementById('perg'+i+'_'+j); if(pd) pd.classList.add('red');
+      var av=document.getElementById('av'+i+'_'+j); if(av){av.className='aviso vermelho'; av.innerHTML='🔴 Resposta marcada para revisar (muito parecida com o texto). Reescreva com as suas palavras para tirar a marca.';}
+    }
+    var chk=document.getElementById('chk'+i+'_'+j); if(chk){
+      var h='<b style="font-size:.8rem;color:#8ff0c8">Confira você: a sua resposta…</b>';
+      p.chk.forEach(function(pt,k){
+        var val=ep.chk[k]||'';
+        h+='<div class="item"><span>'+pt+'</span><span class="simnao">'
+         +'<button class="sim'+(val==='sim'?' ativo':'')+'" onclick="marcarChk('+i+','+j+','+k+',\'sim\')">Sim</button>'
+         +'<button class="nao'+(val==='nao'?' ativo':'')+'" onclick="marcarChk('+i+','+j+','+k+',\'nao\')">Não</button>'
+         +'</span></div>';
+      });
+      chk.innerHTML=h;
+    }
+  });
+  atualizarStatusBloco(i);
+  var btn=document.getElementById('conf'+i); if(btn){ btn.textContent='✔️ Gema conferida'; btn.disabled=true; }
+  if(i<BLOCOS.length-1){
+    var px=document.getElementById('px'+i);
+    if(px) px.innerHTML='<a href="#bloco'+(i+1)+'" onclick="irBloco('+(i+1)+');return false;">➡️ Ir para a próxima gema</a>';
+  }
+}
+
+function marcarChk(i,j,k,val){
+  var ep=estPerg(i,j); ep.chk[k]=val;
+  salvar(); mostrarConferido(i); atualizarStatusBloco(i); atualizarRelatorio();
+}
+
+function statusPergunta(i,j){
+  var ep=estPerg(i,j), p=BLOCOS[i].perguntas[j];
+  if(ep.red) return 'revisar';
+  var temNao=false, todasResp=true;
+  p.chk.forEach(function(pt,k){ if(ep.chk[k]==='nao') temNao=true; if(!ep.chk[k]) todasResp=false; });
+  if(temNao) return 'revisar';
+  if(!todasResp) return 'pendente';
+  return 'ok';
+}
+function atualizarStatusBloco(i){
+  var st=document.getElementById('st'+i); if(!st) return;
+  var revisar=false, pendente=false;
+  BLOCOS[i].perguntas.forEach(function(p,j){ var s=statusPergunta(i,j); if(s==='revisar')revisar=true; if(s==='pendente')pendente=true; });
+  var b=estBloco(i); b.status=revisar?'revisar':(pendente?'pendente':'ok');
+  if(revisar) st.innerHTML='<span style="color:#ffc2cd">🔁 Esta gema tem pontos para revisar.</span>';
+  else if(pendente) st.innerHTML='<span style="color:var(--ambar)">📝 Responda a autoavaliação (Sim/Não) de cada pergunta.</span>';
+  else st.innerHTML='<span style="color:#8ff0c8">✅ Gema lapidada com sucesso!</span>';
+  atualizarRelatorio();
+}
+
+function atualizarRelatorio(){
+  var lista=[], totalConf=0, totalRed=0, totalNao=0;
+  BLOCOS.forEach(function(bloco,i){
+    var b=estBloco(i); if(!b.conferido) return; totalConf++;
+    bloco.perguntas.forEach(function(p,j){
+      var ep=estPerg(i,j);
+      if(ep.red){ totalRed++; lista.push('Gema '+(i+1)+' ('+bloco.titulo+'): pergunta '+(j+1)+' — resposta muito parecida com o texto.'); }
+      p.chk.forEach(function(pt,k){ if(ep.chk[k]==='nao'){ totalNao++; lista.push('Gema '+(i+1)+' ('+bloco.titulo+'): revisar — "'+pt+'"'); } });
+    });
+  });
+  var rev=document.getElementById('revisar'), rl=document.getElementById('revisar-lista');
+  if(lista.length){ rev.style.display='block'; rl.innerHTML=lista.map(function(x){return '<li>'+x+'</li>';}).join(''); }
+  else { rev.style.display='none'; rl.innerHTML=''; }
+  document.getElementById('rel-conteudo').innerHTML='<b>Gemas conferidas:</b> '+totalConf+' de '+BLOCOS.length+'.<br>'
+    +'<b>Respostas marcadas em vermelho (muito parecidas com o texto):</b> '+totalRed+'.<br>'
+    +'<b>Pontos marcados como "Não" na autoavaliação:</b> '+totalNao+'.<br>'
+    +(lista.length? '<span style="color:#ffc2cd">Há '+lista.length+' ponto(s) para revisar (lista acima).</span>' : '<span style="color:#8ff0c8">Sem pontos pendentes para revisar. 👏</span>');
+}
+
+function exportar(){
+  var dados=JSON.stringify(estado,null,2);
+  var blob=new Blob([dados],{type:'application/json'});
+  var a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='leitura-estendida_lapidario.json'; a.click();
+}
+function importar(ev){
+  var f=ev.target.files[0]; if(!f) return;
+  var r=new FileReader();
+  r.onload=function(){ try{ estado=JSON.parse(r.result); if(!estado.blocos) estado.blocos={}; salvar(); render(); mostrarModal('✅ Progresso importado!',false); }catch(e){ mostrarModal('❌ Arquivo inválido.',false); } };
+  r.readAsText(f);
+}
+var acaoZerar=null;
+function pedirZerar(){ acaoZerar=true; mostrarModal('Tem certeza que quer apagar TODO o progresso desta leitura? (Se ela já foi concluída, o Quiz continua destravado.)',true); }
+function mostrarModal(txt,confirmar){
+  document.getElementById('modal-txt').innerHTML=txt;
+  document.getElementById('modal').classList.add('show');
+  document.getElementById('modal-cancel').style.display=confirmar?'inline-block':'none';
+  document.getElementById('modal-ok').textContent=confirmar?'Sim, apagar':'Ok';
+  document.getElementById('modal-ok').onclick=function(){ if(confirmar && acaoZerar){ var c=estado.concluido, ce=estado.concluidoEm; estado={blocos:{}}; if(c){estado.concluido=true; estado.concluidoEm=ce;} salvar(); render(); } acaoZerar=null; fecharModal(); };
+}
+function fecharModal(){ document.getElementById('modal').classList.remove('show'); }
+
+render();
+
+</script>
+</body>
+</html>
